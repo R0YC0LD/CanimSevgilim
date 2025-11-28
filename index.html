@@ -1,637 +1,130 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>İbrahim &amp; Sümeyye | Yıl Dönümü &amp; Yılbaşı</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    :root {
-      --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
-      --accent: #f97373;
-      --accent-soft: rgba(249, 115, 115, 0.1);
-      --text-main: #e5e7eb;
-      --text-soft: #9ca3af;
-      --card-bg: rgba(15, 23, 42, 0.9);
-      --border-soft: rgba(148, 163, 184, 0.3);
-      --gold: #fbbf24;
-    }
+<meta charset="UTF-8" />
+<title>İbrahim & Sümeyye – Özel Anılar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+<style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: #ffe6f2;
+        color: #444;
     }
 
-    .bg-overlay {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.15;
-      background-image:
-        radial-gradient(circle at 10% 20%, #f97373 0, transparent 50%),
-        radial-gradient(circle at 90% 80%, #38bdf8 0, transparent 50%);
-      z-index: -2;
+    header {
+        text-align: center;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #ffb6d9, #ffd9ea);
+        color: #fff;
     }
 
-    .stars {
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(248, 250, 252, 0.3) 1px, transparent 1px);
-      background-size: 3px 3px;
-      opacity: 0.1;
-      z-index: -3;
+    header h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
     }
 
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      padding: 24px 16px 40px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 24px;
-      border: 1px solid var(--border-soft);
-      box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.45),
-        0 0 40px rgba(248, 250, 252, 0.03);
-      padding: 24px;
-      backdrop-filter: blur(18px);
-    }
-
-    @media (min-width: 768px) {
-      .card {
-        padding: 32px 40px;
-      }
-    }
-
-    .header {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: center;
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .tag span {
-      font-size: 16px;
-    }
-
-    .heart {
-      animation: pulse 1.3s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-
-    .title {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    @media (min-width: 768px) {
-      .title {
-        font-size: 34px;
-      }
-    }
-
-    .names {
-      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 60%);
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      font-size: 14px;
-      color: var(--text-soft);
-    }
-
-    .names span {
-      color: #e5e7eb;
-      font-weight: 600;
-    }
-
-    .grid {
-      display: grid;
-      gap: 20px;
-    }
-
-    @media (min-width: 900px) {
-      .grid {
-        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-        align-items: start;
-      }
+    header p {
+        opacity: 0.9;
     }
 
     .section {
-      border-radius: 20px;
-      border: 1px solid var(--border-soft);
-      padding: 18px 18px 20px;
-      background: radial-gradient(circle at top left, rgba(248, 250, 252, 0.04), transparent 65%);
+        background: #fff;
+        margin: 20px auto;
+        width: min(900px, 95%);
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
 
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-      gap: 8px;
+    .photo-box {
+        width: 100%;
+        height: 270px;
+        border-radius: 14px;
+        background: #ffd9ea;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #b46378;
+        font-size: 18px;
+        margin-bottom: 15px;
     }
 
-    .section-title {
-      font-size: 16px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    .year-message {
+        text-align: center;
+        padding: 20px;
+        background: #fff4fc;
+        border: 1px dashed #ff94c2;
+        border-radius: 12px;
+        margin-top: 20px;
     }
 
-    .section-title span.icon {
-      font-size: 18px;
+    .hidden {
+        display: none;
     }
 
-    .section-sub {
-      font-size: 13px;
-      color: var(--text-soft);
+    audio {
+        width: 100%;
+        margin-top: 10px;
     }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .btn {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      padding: 8px 16px;
-      font-size: 13px;
-      cursor: pointer;
-      background: transparent;
-      color: var(--text-main);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
-    }
-
-    .btn-primary {
-      background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.18), transparent 55%), var(--accent);
-      border-color: rgba(248, 113, 113, 0.9);
-      color: #111827;
-      font-weight: 600;
-      box-shadow: 0 12px 25px rgba(248, 113, 113, 0.35);
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.5);
-      background: rgba(15, 23, 42, 0.85);
-    }
-
-    .btn-primary:hover {
-      background: #fb7185;
-    }
-
-    .btn span.icon {
-      font-size: 15px;
-    }
-
-    /* Yılbaşı geri sayım */
-    .countdown-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 4px;
-    }
-
-    .countdown {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .time-box {
-      padding: 10px 8px 12px;
-      border-radius: 18px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      text-align: center;
-    }
-
-    .time-value {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-
-    .time-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      color: var(--text-soft);
-      letter-spacing: 0.12em;
-      margin-top: 4px;
-    }
-
-    .countdown-note {
-      font-size: 12px;
-      color: var(--gold);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .countdown-note span.icon {
-      font-size: 16px;
-    }
-
-    /* Yıl dönümü bölümü */
-    .anniversary-text {
-      font-size: 14px;
-      line-height: 1.7;
-      color: var(--text-soft);
-      margin-top: 8px;
-    }
-
-    .anniversary-highlight {
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 16px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px dashed rgba(248, 113, 113, 0.6);
-      font-size: 13px;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .anniversary-highlight strong {
-      color: #e5e7eb;
-    }
-
-    .anniversary-badge {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(248, 113, 113, 0.6);
-      font-size: 11px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--accent);
-      background: rgba(15, 23, 42, 0.95);
-    }
-
-    /* Anı çizgisi */
-    .timeline {
-      margin-top: 10px;
-      border-left: 2px solid rgba(148, 163, 184, 0.5);
-      padding-left: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: 2px;
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -15px;
-      top: 4px;
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 14px rgba(248, 113, 113, 0.7);
-    }
-
-    .timeline-title {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .timeline-desc {
-      font-size: 12px;
-      color: var(--text-soft);
-    }
-
-    /* Mesajlar */
-    .messages {
-      display: grid;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .message-card {
-      border-radius: 16px;
-      padding: 10px 12px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      background: rgba(15, 23, 42, 0.9);
-      font-size: 13px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .message-card::after {
-      content: "";
-      position: absolute;
-      top: -40px;
-      right: -40px;
-      width: 80px;
-      height: 80px;
-      background: radial-gradient(circle, rgba(248, 250, 252, 0.18), transparent 65%);
-      opacity: 0.4;
-    }
-
-    .message-from {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-soft);
-      margin-bottom: 4px;
-    }
-
-    .message-text {
-      position: relative;
-      z-index: 1;
-      line-height: 1.7;
-    }
-
-    /* Footer */
-    .footer {
-      margin-top: 24px;
-      font-size: 11px;
-      color: var(--text-soft);
-      text-align: center;
-      opacity: 0.7;
-    }
-
-    .footer span {
-      color: var(--accent);
-    }
-
-    /* Küçük ekran uyarlama */
-    @media (max-width: 480px) {
-      .title {
-        font-size: 24px;
-      }
-      .card {
-        padding: 20px 16px;
-      }
-      .time-value {
-        font-size: 16px;
-      }
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <div class="bg-overlay"></div>
-  <div class="stars"></div>
 
-  <div class="container">
-    <main class="card">
-      <!-- Üst kısım -->
-      <header class="header">
-        <div class="tag">
-          <span class="heart">❤</span>
-          <span>Yıl Dönümü &amp; Yılbaşı Özel</span>
-        </div>
-        <h1 class="title">İBRAHİM &amp; SÜMEYYE</h1>
-        <div class="names">
-          <span>“İki kalp, tek takvim – her gün yeniden başlıyor.”</span>
-        </div>
+<header>
+    <h1>💗 İbrahim & Sümeyye 💗</h1>
+    <p>Sevgi defterinizin dijital hali</p>
+</header>
 
-        <div class="buttons">
-          <button class="btn btn-primary" onclick="scrollToSection('anniversary')">
-            <span class="icon">💞</span>
-            Yıl Dönümü Mesajı
-          </button>
-          <button class="btn" onclick="scrollToSection('newyear')">
-            <span class="icon">🎆</span>
-            Yılbaşı Geri Sayım
-          </button>
-        </div>
-      </header>
+<div class="section">
+    <h2>📸 En Sevdiğim Fotoğraf</h2>
+    <div class="photo-box">Buraya fotoğraf ekleyebilirsin</div>
 
-      <!-- İçerik grid -->
-      <section class="grid">
-        <!-- Sol taraf: Yıl dönümü ve anılar -->
-        <section id="anniversary" class="section">
-          <div class="section-header">
-            <div>
-              <div class="section-title">
-                <span class="icon">💍</span>
-                <span>Yıl Dönümü Özel Mesajı</span>
-              </div>
-              <p class="section-sub">
-                Bugün, “biz” kelimesinin en çok anlam kazandığı gün.
-              </p>
-            </div>
-          </div>
+    <textarea style="width:100%;height:120px;border-radius:12px;padding:12px;border:1px solid #ffb6d9;">
+Buraya fotoğrafın altına özel not / şiir / anı yazılabilir...
+    </textarea>
+</div>
 
-          <p class="anniversary-text">
-            İbrahim &amp; Sümeyye…<br />
-            Zaman akıp giderken sizin hikâyeniz, her gün yazılan sessiz bir masal gibi.
-            Kendi küçük evreninizde, kah gülerek kah susarak ama hep yan yana büyüyen iki
-            kalp…<br /><br />
-            Bu sayfa; bu yılı, bu anı ve birbirinize “iyi ki” dediğiniz tüm günleri
-            hatırlatmak için burada dursun. Belki yıllar sonra bile açıp baktığınızda,
-            “Biz hep böyleydik.” demeniz için…
-          </p>
+<div class="section">
+    <h2>📸 Ek Fotoğraflar</h2>
+    <div class="photo-box">Fotoğraf 1</div>
+    <div class="photo-box">Fotoğraf 2</div>
+    <div class="photo-box">Fotoğraf 3</div>
+</div>
 
-          <div class="anniversary-highlight">
-            <div>
-              <strong>Bugünün cümlesi:</strong><br />
-              “Ne olursa olsun, yeni yıl değil; sensiz yıl eksik kalır.”
-            </div>
-            <div class="anniversary-badge">
-              <span>∞</span>
-              <span>Her yıl, ilk yıl gibi özel</span>
-            </div>
-          </div>
+<div class="section">
+    <h2>🎵 Müzik</h2>
+    <p>İstersen buraya şarkı koyabilirim. (mp3 yükleyince çalışır)</p>
+    <audio controls>
+        <source src="muzik.mp3" type="audio/mpeg">
+    </audio>
+</div>
 
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-title">İlk Buluşma</div>
-              <div class="timeline-desc">
-                Belki bir bankta, belki bir durakta… Ama ikiniz de biliyorsunuz ki o gün
-                hayat “öncesi/sonrası” diye ikiye ayrıldı.
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-title">İlk “Biz” Fotoğrafı</div>
-              <div class="timeline-desc">
-                Çekilen sadece bir fotoğraf değildi; iki farklı hayatın aynı karede
-                durmayı kabul etmesiydi.
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-title">Bu Yıl</div>
-              <div class="timeline-desc">
-                Yorulduğunuz, güldüğünüz, tartışıp barıştığınız, birbirinizi daha iyi
-                tanıdığınız bir yıl… Ve tüm karmaşanın içinden yine el ele çıktığınız bir yol.
-              </div>
-            </div>
-          </div>
-        </section>
+<div class="section year-message">
+    <h2>🎄 1 Ocak Sürpriz Mesajı</h2>
+    <p id="newYearText" class="hidden">
+        Yeni yılın ilk dakikasında açılan bir mesaj…  
+        <br><br>
+        Buraya istediğin özel yılbaşı mesajını yazabilirsin.
+    </p>
+    <p id="lockedText" class="">
+        Bu mesaj <b>1 Ocak</b> tarihinde açılacaktır. 🎁
+    </p>
+</div>
 
-        <!-- Sağ taraf: Yılbaşı & mesajlar -->
-        <section id="newyear" class="section">
-          <div class="section-header">
-            <div>
-              <div class="section-title">
-                <span class="icon">🎄</span>
-                <span>Yeni Yıl Geri Sayım</span>
-              </div>
-              <p class="section-sub" id="newYearTitle">
-                Yeni yıl, yeni dilekler ve ikiniz için yeni “iyi ki”ler…
-              </p>
-            </div>
-          </div>
+<script>
+    // 1 Ocak mesaj kilidi
+    const today = new Date();
+    const month = today.getMonth();   // 0 = Ocak
+    const day = today.getDate();
 
-          <div class="countdown-wrapper">
-            <div class="countdown" id="countdown">
-              <div class="time-box">
-                <div class="time-value" id="days">--</div>
-                <div class="time-label">Gün</div>
-              </div>
-              <div class="time-box">
-                <div class="time-value" id="hours">--</div>
-                <div class="time-label">Saat</div>
-              </div>
-              <div class="time-box">
-                <div class="time-value" id="minutes">--</div>
-                <div class="time-label">Dakika</div>
-              </div>
-              <div class="time-box">
-                <div class="time-value" id="seconds">--</div>
-                <div class="time-label">Saniye</div>
-              </div>
-            </div>
-
-            <div class="countdown-note" id="countdownNote">
-              <span class="icon">✨</span>
-              <span>Her geçen saniye, ikiniz için yazılan yeni satırlara dönüşüyor…</span>
-            </div>
-          </div>
-
-          <div class="messages">
-            <div class="message-card">
-              <div class="message-from">İBRAHİM’DEN SÜMEYYE’YE</div>
-              <div class="message-text">
-                “Yeni yılda dileğim; kalbini kıran her an için bin tane daha fazla sarılma
-                şansım olsun. Gün bittikçe değil, sen güldükçe yenilenmek istiyorum.”
-              </div>
-            </div>
-            <div class="message-card">
-              <div class="message-from">SÜMEYYE’DEN İBRAHİM’E</div>
-              <div class="message-text">
-                “Takvim yaprakları değişsin, mevsimler dönsün… Benim için yeni yıl; sen
-                ‘yanımdasın’ dediğin an başlar. Geri kalan her şey detay.”
-              </div>
-            </div>
-          </div>
-        </section>
-      </section>
-
-      <footer class="footer">
-        <p>
-          Bu sayfa, <span>İbrahim &amp; Sümeyye</span> için hazırlanmış dijital bir
-          anı defteri. Yıl dönümü kutlu olsun, yeni yılınız aşkla dolsun. 🎆
-        </p>
-      </footer>
-    </main>
-  </div>
-
-  <script>
-    // Bölüme kaydır
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+    if (month === 0 && day >= 1) {
+        document.getElementById("newYearText").classList.remove("hidden");
+        document.getElementById("lockedText").classList.add("hidden");
     }
+</script>
 
-    // Yeni yılı otomatik hesapla (bir sonraki Ocak 1)
-    (function initCountdown() {
-      const now = new Date();
-      const currentYear = now.getFullYear();
-      let newYear = new Date(currentYear + 1, 0, 1, 0, 0, 0); // 1 Ocak, gelecek yıl
-
-      // Eğer şu an zaten yeni yıldan sonraysa bile, bir sonrakini seç
-      if (now < new Date(currentYear, 0, 1, 0, 0, 0)) {
-        newYear = new Date(currentYear, 0, 1, 0, 0, 0);
-      }
-
-      const newYearTitle = document.getElementById("newYearTitle");
-      newYearTitle.textContent =
-        newYear.getFullYear() +
-        " yılına geri sayım: Her saniye, ikiniz için yeni bir başlangıç.";
-
-      function updateCountdown() {
-        const now = new Date();
-        const diff = newYear.getTime() - now.getTime();
-
-        if (diff <= 0) {
-          document.getElementById("countdown").style.opacity = "0.5";
-          document.getElementById("days").textContent = "0";
-          document.getElementById("hours").textContent = "0";
-          document.getElementById("minutes").textContent = "0";
-          document.getElementById("seconds").textContent = "0";
-          const note = document.getElementById("countdownNote");
-          note.innerHTML =
-            '<span class="icon">🎉</span><span>Yeni yıl geldi! Dilekleriniz kabul, kalpleriniz hep birbirine yol olsun.</span>';
-          return;
-        }
-
-        const seconds = Math.floor(diff / 1000);
-        const days = Math.floor(seconds / (60 * 60 * 24));
-        const hours = Math.floor((seconds % (60 * 60 * 24)) / (60 * 60));
-        const minutes = Math.floor((seconds % (60 * 60)) / 60);
-        const secs = seconds % 60;
-
-        document.getElementById("days").textContent = String(days);
-        document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-        document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-        document.getElementById("seconds").textContent = String(secs).padStart(2, "0");
-      }
-
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-    })();
-  </script>
 </body>
 </html>
