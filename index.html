@@ -1,275 +1,637 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Motor Tutkusu</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap">
+  <meta charset="UTF-8" />
+  <title>İbrahim &amp; Sümeyye | Yıl Dönümü &amp; Yılbaşı</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body {
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+      --accent: #f97373;
+      --accent-soft: rgba(249, 115, 115, 0.1);
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --border-soft: rgba(148, 163, 184, 0.3);
+      --gold: #fbbf24;
+    }
+
+    * {
       margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: #0f0f0f;
-      color: #ffffff;
+      padding: 0;
+      box-sizing: border-box;
     }
-    header {
-      background-color: #1f1f1f;
-      padding: 20px;
-      text-align: center;
-      font-size: 2rem;
-      border-bottom: 2px solid #ff0000;
-    }
-    nav {
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
       display: flex;
       justify-content: center;
-      background-color: #2a2a2a;
-      border-bottom: 1px solid #444;
+      align-items: stretch;
     }
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      padding: 15px 25px;
-      transition: background 0.3s;
+
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.15;
+      background-image:
+        radial-gradient(circle at 10% 20%, #f97373 0, transparent 50%),
+        radial-gradient(circle at 90% 80%, #38bdf8 0, transparent 50%);
+      z-index: -2;
     }
-    nav a:hover {
-      background-color: #ff0000;
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(248, 250, 252, 0.3) 1px, transparent 1px);
+      background-size: 3px 3px;
+      opacity: 0.1;
+      z-index: -3;
     }
-    section {
-      display: none;
-      padding: 40px;
-    }
-    section.active {
-      display: block;
-    }
-    .video-box {
-      background: #1a1a1a;
-      border: 2px dashed #ff0000;
-      padding: 20px;
-      margin-top: 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .video-box:hover {
-      background: #2f2f2f;
-    }
-    iframe {
+
+    .container {
       width: 100%;
-      height: 400px;
-      margin-top: 20px;
-      border: none;
+      max-width: 1100px;
+      padding: 24px 16px 40px;
     }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #1f1f1f;
-      border-top: 2px solid #ff0000;
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      border: 1px solid var(--border-soft);
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.45),
+        0 0 40px rgba(248, 250, 252, 0.03);
+      padding: 24px;
+      backdrop-filter: blur(18px);
     }
-    #music-player {
-      background: #1f1f1f;
-      border-top: 2px solid #ff0000;
-      padding: 20px;
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 32px 40px;
+      }
+    }
+
+    .header {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
       align-items: center;
-      gap: 15px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .tag span {
+      font-size: 16px;
+    }
+
+    .heart {
+      animation: pulse 1.3s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 768px) {
+      .title {
+        font-size: 34px;
+      }
+    }
+
+    .names {
+      background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 60%);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .names span {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+        align-items: start;
+      }
+    }
+
+    .section {
+      border-radius: 20px;
+      border: 1px solid var(--border-soft);
+      padding: 18px 18px 20px;
+      background: radial-gradient(circle at top left, rgba(248, 250, 252, 0.04), transparent 65%);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title span.icon {
+      font-size: 18px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 8px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.18), transparent 55%), var(--accent);
+      border-color: rgba(248, 113, 113, 0.9);
+      color: #111827;
+      font-weight: 600;
+      box-shadow: 0 12px 25px rgba(248, 113, 113, 0.35);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.5);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .btn-primary:hover {
+      background: #fb7185;
+    }
+
+    .btn span.icon {
+      font-size: 15px;
+    }
+
+    /* Yılbaşı geri sayım */
+    .countdown-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .time-box {
+      padding: 10px 8px 12px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      text-align: center;
+    }
+
+    .time-value {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .time-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      letter-spacing: 0.12em;
+      margin-top: 4px;
+    }
+
+    .countdown-note {
+      font-size: 12px;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .countdown-note span.icon {
+      font-size: 16px;
+    }
+
+    /* Yıl dönümü bölümü */
+    .anniversary-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-soft);
+      margin-top: 8px;
+    }
+
+    .anniversary-highlight {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px dashed rgba(248, 113, 113, 0.6);
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
       flex-wrap: wrap;
     }
-    #music-player input {
-      padding: 5px;
-      width: 200px;
+
+    .anniversary-highlight strong {
+      color: #e5e7eb;
     }
-    #music-player button {
-      background-color: #ff0000;
-      border: none;
-      color: white;
-      padding: 10px 15px;
-      font-family: 'Orbitron', sans-serif;
-      cursor: pointer;
-      transition: background 0.3s;
+
+    .anniversary-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 113, 113, 0.6);
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      background: rgba(15, 23, 42, 0.95);
     }
-    #music-player button:hover {
-      background-color: #cc0000;
-    }
-    #playlist-display {
+
+    /* Anı çizgisi */
+    .timeline {
       margin-top: 10px;
+      border-left: 2px solid rgba(148, 163, 184, 0.5);
+      padding-left: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 2px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -15px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(248, 113, 113, 0.7);
+    }
+
+    .timeline-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .timeline-desc {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    /* Mesajlar */
+    .messages {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .message-card {
+      border-radius: 16px;
+      padding: 10px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 13px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .message-card::after {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, rgba(248, 250, 252, 0.18), transparent 65%);
+      opacity: 0.4;
+    }
+
+    .message-from {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+
+    .message-text {
+      position: relative;
+      z-index: 1;
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 24px;
+      font-size: 11px;
+      color: var(--text-soft);
       text-align: center;
+      opacity: 0.7;
     }
-    #playlist-display ul {
-      list-style: none;
-      padding: 0;
+
+    .footer span {
+      color: var(--accent);
     }
-    #playlist-display li {
-      padding: 5px 0;
-      color: #ccc;
-    }
-    #playlist-display li.active {
-      color: #ff0000;
+
+    /* Küçük ekran uyarlama */
+    @media (max-width: 480px) {
+      .title {
+        font-size: 24px;
+      }
+      .card {
+        padding: 20px 16px;
+      }
+      .time-value {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
-<body onload="playMusic();">
+<body>
+  <div class="bg-overlay"></div>
+  <div class="stars"></div>
 
-  <header>Motor Tutkusu</header>
+  <div class="container">
+    <main class="card">
+      <!-- Üst kısım -->
+      <header class="header">
+        <div class="tag">
+          <span class="heart">❤</span>
+          <span>Yıl Dönümü &amp; Yılbaşı Özel</span>
+        </div>
+        <h1 class="title">İBRAHİM &amp; SÜMEYYE</h1>
+        <div class="names">
+          <span>“İki kalp, tek takvim – her gün yeniden başlıyor.”</span>
+        </div>
 
-  <nav>
-    <a href="#" onclick="showTab('hakkimizda')">Hakkımızda</a>
-    <a href="#" onclick="showTab('galeri')">Galeri</a>
-    <a href="#" onclick="showTab('modeller')">Modeller</a>
-    <a href="#" onclick="showTab('videolar')">Videolar</a>
-    <a href="#" onclick="showTab('iletisim')">İletişim</a>
-  </nav>
+        <div class="buttons">
+          <button class="btn btn-primary" onclick="scrollToSection('anniversary')">
+            <span class="icon">💞</span>
+            Yıl Dönümü Mesajı
+          </button>
+          <button class="btn" onclick="scrollToSection('newyear')">
+            <span class="icon">🎆</span>
+            Yılbaşı Geri Sayım
+          </button>
+        </div>
+      </header>
 
-  <section id="hakkimizda" class="active">
-    <h2>Motor Tutkusuna Hoşgeldiniz</h2>
-    <p>Adrenalin, hız ve özgürlük... Bu site motor severler için özel olarak hazırlanmıştır.</p>
-  </section>
+      <!-- İçerik grid -->
+      <section class="grid">
+        <!-- Sol taraf: Yıl dönümü ve anılar -->
+        <section id="anniversary" class="section">
+          <div class="section-header">
+            <div>
+              <div class="section-title">
+                <span class="icon">💍</span>
+                <span>Yıl Dönümü Özel Mesajı</span>
+              </div>
+              <p class="section-sub">
+                Bugün, “biz” kelimesinin en çok anlam kazandığı gün.
+              </p>
+            </div>
+          </div>
 
-  <section id="galeri">
-    <h2>Galeri</h2>
-    <p>En sevilen motor fotoğraflarını burada bulabilirsiniz. (İçerik eklenebilir)</p>
-  </section>
+          <p class="anniversary-text">
+            İbrahim &amp; Sümeyye…<br />
+            Zaman akıp giderken sizin hikâyeniz, her gün yazılan sessiz bir masal gibi.
+            Kendi küçük evreninizde, kah gülerek kah susarak ama hep yan yana büyüyen iki
+            kalp…<br /><br />
+            Bu sayfa; bu yılı, bu anı ve birbirinize “iyi ki” dediğiniz tüm günleri
+            hatırlatmak için burada dursun. Belki yıllar sonra bile açıp baktığınızda,
+            “Biz hep böyleydik.” demeniz için…
+          </p>
 
-  <section id="modeller">
-    <h2>Popüler Modeller</h2>
-    <ul>
-      <li>Yamaha R6</li>
-      <li>Honda CBR 600RR</li>
-      <li>Kawasaki Ninja ZX-6R</li>
-      <li>Harley Davidson Street Bob</li>
-    </ul>
-  </section>
+          <div class="anniversary-highlight">
+            <div>
+              <strong>Bugünün cümlesi:</strong><br />
+              “Ne olursa olsun, yeni yıl değil; sensiz yıl eksik kalır.”
+            </div>
+            <div class="anniversary-badge">
+              <span>∞</span>
+              <span>Her yıl, ilk yıl gibi özel</span>
+            </div>
+          </div>
 
-  <section id="videolar">
-    <h2>Rastgele Motor Videoları</h2>
-    <div class="video-box" onclick="loadRandomVideo()">
-      Buraya tıklayarak rastgele bir motor videosu izleyin!
-    </div>
-    <div id="video-container"></div>
-  </section>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-title">İlk Buluşma</div>
+              <div class="timeline-desc">
+                Belki bir bankta, belki bir durakta… Ama ikiniz de biliyorsunuz ki o gün
+                hayat “öncesi/sonrası” diye ikiye ayrıldı.
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-title">İlk “Biz” Fotoğrafı</div>
+              <div class="timeline-desc">
+                Çekilen sadece bir fotoğraf değildi; iki farklı hayatın aynı karede
+                durmayı kabul etmesiydi.
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-title">Bu Yıl</div>
+              <div class="timeline-desc">
+                Yorulduğunuz, güldüğünüz, tartışıp barıştığınız, birbirinizi daha iyi
+                tanıdığınız bir yıl… Ve tüm karmaşanın içinden yine el ele çıktığınız bir yol.
+              </div>
+            </div>
+          </div>
+        </section>
 
-  <section id="iletisim">
-    <h2>İletişim</h2>
-    <p>Bize ulaşmak için: motortutkusu@example.com</p>
-  </section>
+        <!-- Sağ taraf: Yılbaşı & mesajlar -->
+        <section id="newyear" class="section">
+          <div class="section-header">
+            <div>
+              <div class="section-title">
+                <span class="icon">🎄</span>
+                <span>Yeni Yıl Geri Sayım</span>
+              </div>
+              <p class="section-sub" id="newYearTitle">
+                Yeni yıl, yeni dilekler ve ikiniz için yeni “iyi ki”ler…
+              </p>
+            </div>
+          </div>
 
-  <footer>
-    &copy; 2025 Motor Tutkusu - Tüm hakları saklıdır.
-  </footer>
+          <div class="countdown-wrapper">
+            <div class="countdown" id="countdown">
+              <div class="time-box">
+                <div class="time-value" id="days">--</div>
+                <div class="time-label">Gün</div>
+              </div>
+              <div class="time-box">
+                <div class="time-value" id="hours">--</div>
+                <div class="time-label">Saat</div>
+              </div>
+              <div class="time-box">
+                <div class="time-value" id="minutes">--</div>
+                <div class="time-label">Dakika</div>
+              </div>
+              <div class="time-box">
+                <div class="time-value" id="seconds">--</div>
+                <div class="time-label">Saniye</div>
+              </div>
+            </div>
 
-  <div id="music-player">
-    <input type="text" id="youtubeSearch" placeholder="Şarkı ara...">
-    <button onclick="searchSong()">Ara</button>
-    <button onclick="prevSong()">⏮ Geri</button>
-    <button onclick="pauseSong()">⏸ Durdur</button>
-    <button onclick="nextSong()">⏭ İleri</button>
+            <div class="countdown-note" id="countdownNote">
+              <span class="icon">✨</span>
+              <span>Her geçen saniye, ikiniz için yazılan yeni satırlara dönüşüyor…</span>
+            </div>
+          </div>
+
+          <div class="messages">
+            <div class="message-card">
+              <div class="message-from">İBRAHİM’DEN SÜMEYYE’YE</div>
+              <div class="message-text">
+                “Yeni yılda dileğim; kalbini kıran her an için bin tane daha fazla sarılma
+                şansım olsun. Gün bittikçe değil, sen güldükçe yenilenmek istiyorum.”
+              </div>
+            </div>
+            <div class="message-card">
+              <div class="message-from">SÜMEYYE’DEN İBRAHİM’E</div>
+              <div class="message-text">
+                “Takvim yaprakları değişsin, mevsimler dönsün… Benim için yeni yıl; sen
+                ‘yanımdasın’ dediğin an başlar. Geri kalan her şey detay.”
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <footer class="footer">
+        <p>
+          Bu sayfa, <span>İbrahim &amp; Sümeyye</span> için hazırlanmış dijital bir
+          anı defteri. Yıl dönümü kutlu olsun, yeni yılınız aşkla dolsun. 🎆
+        </p>
+      </footer>
+    </main>
   </div>
 
-  <div id="playlist-display"></div>
-  <div id="yt-player" style="display:none;"></div>
-
-  <audio id="bgMusic" autoplay loop>
-    <source src="motor_intro.mp3" type="audio/mpeg">
-    Tarayıcınız ses öğesini desteklemiyor.
-  </audio>
-
-  <script src="https://www.youtube.com/iframe_api"></script>
   <script>
-    function showTab(tabId) {
-      const tabs = document.querySelectorAll('section');
-      tabs.forEach(tab => tab.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
+    // Bölüme kaydır
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
 
-    function playMusic() {
-      const music = document.getElementById('bgMusic');
-      music.play().catch(() => {
-        alert("Lütfen müziği başlatmak için sayfaya tıklayın.");
-      });
-    }
+    // Yeni yılı otomatik hesapla (bir sonraki Ocak 1)
+    (function initCountdown() {
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      let newYear = new Date(currentYear + 1, 0, 1, 0, 0, 0); // 1 Ocak, gelecek yıl
 
-    const videoIds = ["Sa4WrYbGrIs", "bzOnSjVaDPA", "7nRdGAmpK8c", "UnUiYkR_1uo", "toq0KyoB77Q"];
+      // Eğer şu an zaten yeni yıldan sonraysa bile, bir sonrakini seç
+      if (now < new Date(currentYear, 0, 1, 0, 0, 0)) {
+        newYear = new Date(currentYear, 0, 1, 0, 0, 0);
+      }
 
-    function loadRandomVideo() {
-      const randomId = videoIds[Math.floor(Math.random() * videoIds.length)];
-      document.getElementById('video-container').innerHTML = `
-        <iframe src="https://www.youtube.com/embed/${randomId}" allowfullscreen></iframe>
-      `;
-    }
+      const newYearTitle = document.getElementById("newYearTitle");
+      newYearTitle.textContent =
+        newYear.getFullYear() +
+        " yılına geri sayım: Her saniye, ikiniz için yeni bir başlangıç.";
 
-    let player;
-    let currentIndex = 0;
-    const playlist = [];
+      function updateCountdown() {
+        const now = new Date();
+        const diff = newYear.getTime() - now.getTime();
 
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('yt-player', {
-        height: '0', width: '0', videoId: '',
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
+        if (diff <= 0) {
+          document.getElementById("countdown").style.opacity = "0.5";
+          document.getElementById("days").textContent = "0";
+          document.getElementById("hours").textContent = "0";
+          document.getElementById("minutes").textContent = "0";
+          document.getElementById("seconds").textContent = "0";
+          const note = document.getElementById("countdownNote");
+          note.innerHTML =
+            '<span class="icon">🎉</span><span>Yeni yıl geldi! Dilekleriniz kabul, kalpleriniz hep birbirine yol olsun.</span>';
+          return;
         }
-      });
-    }
 
-    function onPlayerReady(event) {
-      if (playlist.length > 0) {
-        player.loadVideoById(playlist[currentIndex]);
+        const seconds = Math.floor(diff / 1000);
+        const days = Math.floor(seconds / (60 * 60 * 24));
+        const hours = Math.floor((seconds % (60 * 60 * 24)) / (60 * 60));
+        const minutes = Math.floor((seconds % (60 * 60)) / 60);
+        const secs = seconds % 60;
+
+        document.getElementById("days").textContent = String(days);
+        document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+        document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(secs).padStart(2, "0");
       }
-    }
 
-    function onPlayerStateChange(event) {
-      if (event.data === YT.PlayerState.ENDED) {
-        nextSong();
-      }
-    }
-
-    function updatePlaylistDisplay() {
-      const display = document.getElementById('playlist-display');
-      let html = '<ul>';
-      playlist.forEach((id, index) => {
-        const active = index === currentIndex ? 'active' : '';
-        html += `<li class="${active}">#${index + 1}: https://youtu.be/${id}</li>`;
-      });
-      html += '</ul>';
-      display.innerHTML = html;
-    }
-
-    function searchSong() {
-      const query = document.getElementById('youtubeSearch').value;
-      fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${encodeURIComponent(query)}&type=video&key=AIzaSyCrC4r9P2xZOZGqyjw72hyuJFDlNYK2GO8`)
-        .then(res => res.json())
-        .then(data => {
-          const videoId = data.items[0].id.videoId;
-          playlist.push(videoId);
-          currentIndex = playlist.length - 1;
-          player.loadVideoById(videoId);
-          updatePlaylistDisplay();
-        });
-    }
-
-    function pauseSong() {
-      if (player && typeof player.pauseVideo === 'function') {
-        player.pauseVideo();
-      } else {
-        console.error("Player not ready or pauseVideo function not available.");
-      }
-    }
-
-    function nextSong() {
-      if (playlist.length > 0 && currentIndex < playlist.length - 1) {
-        currentIndex++;
-        player.loadVideoById(playlist[currentIndex]);
-        updatePlaylistDisplay();
-      }
-    }
-
-    function prevSong() {
-      if (playlist.length > 0 && currentIndex > 0) {
-        currentIndex--;
-        player.loadVideoById(playlist[currentIndex]);
-        updatePlaylistDisplay();
-      }
-    }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
   </script>
 </body>
 </html>
