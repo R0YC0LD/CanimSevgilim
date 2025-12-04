@@ -7,36 +7,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* CSS Değişkenleri (Renk Paleti - Açık Pembe) */
+        /* CSS Değişkenleri */
         :root {
             --color-primary: #FFFFFF;
-            --color-accent: #FFC0CB; /* Açık Pembe (Light Pink) */
+            --color-accent: #FFC0CB; 
             --color-text: #333333;
-            --color-secondary-accent: #FFB6C1; /* Daha Canlı Açık Pembe */
+            --color-secondary-accent: #FFB6C1;
             --color-dark-text: #666666;
-            --color-love: #E91E63; /* Koyu, Canlı Pembe */
+            --color-love: #E91E63;
         }
-
-        /* Temel Ayarlar ve Mobil Optimizasyon */
+        /* ... (Önceki CSS kodları burada korunmuştur) ... */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: var(--color-primary);
-            color: var(--color-text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Animasyonlar */
+        body { font-family: 'Open Sans', sans-serif; background-color: var(--color-primary); color: var(--color-text); line-height: 1.6; overflow-x: hidden; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
-
-        .container {
-            width: 100%; min-height: 100vh; padding: 15px; padding-top: 75px;
-            animation: fadeIn 1s ease-out; display: none; 
-        }
+        .container { width: 100%; min-height: 100vh; padding: 15px; padding-top: 75px; animation: fadeIn 1s ease-out; display: none; }
         .container.active { display: block; }
-
         h1, h2 { font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 15px; font-weight: 700; }
         h1 { color: var(--color-love); font-size: 2.2em; }
         h2 { color: var(--color-dark-text); font-size: 1.4em; }
@@ -74,12 +60,12 @@
             object-fit: cover; animation: pulse 4s infinite;
         }
 
-        /* Galeri Yapısı (3 Görsel için Optimize Edildi) */
+        /* Galeri Yapısı (3 Görsel) */
         .gallery {
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 10px; padding: 10px 0;
-            max-width: 600px; /* Galeriyi ortalamak için */
+            max-width: 600px; 
             margin: 0 auto;
         }
         .gallery-item {
@@ -113,7 +99,37 @@
         #lock-icon { font-size: 2.5em; margin-bottom: 10px; }
         #new-year-content { display: none; text-align: center; font-size: 1em; }
 
-        /* Müzik Butonu */
+        /* Müzik Başlatma Ekranı (Yeni) */
+        #music-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+        #music-start-button {
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            background-color: var(--color-love);
+            color: var(--color-primary);
+            border: 5px solid var(--color-accent);
+            font-size: 2em;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s;
+            animation: pulse 1.5s infinite;
+            margin-top: 20px;
+        }
+        #music-start-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Müzik Butonu (Küçük Kontrol) */
         #music-toggle {
             position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
             border-radius: 50%; background-color: var(--color-love); color: var(--color-primary);
@@ -133,12 +149,21 @@
 </head>
 <body>
 
+    <div id="music-overlay">
+        <h1>Hoş Geldiniz ❤️</h1>
+        <p style="color: var(--color-dark-text);">Sürprizin keyfini çıkarmak için lütfen müziği başlatın.</p>
+        <button id="music-start-button">
+            <span style="font-size: 2.5em;">▶️</span>
+        </button>
+        <p style="color: var(--color-dark-text); margin-top: 20px;">İbrahim & Sümeyye</p>
+    </div>
+
     <audio id="background-music" loop preload="auto">
         <source src="sarki.mp3" type="audio/mp3">
     </audio>
 
     <button id="music-toggle" aria-label="Müziği Başlat/Durdur">
-        <span id="music-icon">🎶</span>
+        <span id="music-icon">⏸️</span>
     </button>
 
     <nav class="navbar">
@@ -215,7 +240,8 @@
         const newYearContent = document.getElementById('new-year-content');
         const audio = document.getElementById('background-music');
         const musicToggle = document.getElementById('music-toggle');
-        const musicIcon = document.getElementById('music-icon');
+        const musicStartButton = document.getElementById('music-start-button');
+        const musicOverlay = document.getElementById('music-overlay');
         const heartRain = document.getElementById('heart-rain');
         
         let isMusicPlaying = false;
@@ -230,19 +256,24 @@
             }
         }
 
-        // Müzik Başlatma Denemesi (Otomatik Çalma)
-        function attemptAutoplay() {
+        // Müzik Başlatma İşlemi (Kullanıcı Tıklaması Üzerine)
+        function startMusic() {
             audio.volume = 0.8; 
             audio.play().then(() => {
                 isMusicPlaying = true;
-                musicToggle.style.display = 'none'; 
+                musicOverlay.style.display = 'none'; // Başlatma ekranını gizle
+                musicToggle.style.display = 'flex';  // Kontrol butonunu göster
+                musicIcon.textContent = '⏸️';        // İkonu duraklatma yap
             }).catch(error => {
-                musicToggle.style.display = 'flex'; 
-                musicIcon.textContent = '🎶'; 
+                console.error("Müzik çalma hatası:", error);
+                // Hata oluşursa (dosya bulunamazsa vs.) bile overlay'i kapat
+                musicOverlay.style.display = 'none';
+                musicToggle.style.display = 'none';
+                alert("Müzik dosyası yüklenemedi. Lütfen 'sarki.mp3' dosya yolunu kontrol edin.");
             });
         }
         
-        // Kullanıcı butona tıklarsa
+        // Müzik Kontrol Butonunun İşlevi
         musicToggle.addEventListener('click', () => {
             if (!isMusicPlaying) {
                 audio.play();
@@ -254,6 +285,9 @@
                 musicIcon.textContent = '🎶';
             }
         });
+
+        // Başlatma Butonuna Tıklama Olayı
+        musicStartButton.addEventListener('click', startMusic, { once: true });
         
         // Kalp Yağmuru
         function createHeart() {
@@ -309,10 +343,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             showPage('home-page', navBtns[0]);
             startCountdown(); 
-            attemptAutoplay(); 
-            
-            // Kullanıcı sayfada herhangi bir yere tıklarsa tekrar otomatik çalma denemesi yap
-            document.body.addEventListener('click', attemptAutoplay, { once: true });
         });
     </script>
 </body>
