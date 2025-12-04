@@ -4,235 +4,563 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>İbrahim ♥ Sümeyye — Yıldönümü</title>
+
+<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
+
 <style>
   :root{
-    --bg:#0f0e13;
-    --card:#15121a;
-    --accent:#b76b88;
-    --accent-2:#8f4b66;
-    --muted:#bdb7bf;
-    --glass: rgba(255,255,255,0.04);
-    --soft: rgba(255,255,255,0.03);
+    --bg:#fff;
+    --accent:#b45578; /* hafif koyu pembe-mürdüm arası */
+    --accent-2:#a03f66;
+    --muted:#f7f5f7;
+    --card:#ffffff;
+    --shadow: 0 8px 30px rgba(160,63,102,0.12);
+    --glass: rgba(255,255,255,0.6);
+    --radius:18px;
+    --max-width:980px;
   }
-
   *{box-sizing:border-box}
+  html,body{height:100%}
   body{
     margin:0;
-    font-family:Montserrat, system-ui, sans-serif;
-    background:
-      radial-gradient(1200px 600px at 10% 10%, rgba(143,75,102,0.12), transparent 8%),
-      radial-gradient(900px 400px at 90% 90%, rgba(183,107,136,0.08), transparent 8%),
-      var(--bg);
-    color:#fff;
-    min-height:100vh;
+    font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg, #fff 0%, #fffafc 100%);
+    color:#222;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:32px;
+    padding:32px 18px;
   }
 
   .wrap{
     width:100%;
-    max-width:1100px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:18px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-    overflow:hidden;
-    display:grid;
-    grid-template-columns: 1fr 420px;
-    gap:28px;
-    padding:28px;
+    max-width:var(--max-width);
+    margin:0 auto;
   }
 
-  .left{display:flex;flex-direction:column;gap:20px;}
+  header{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:22px;
+  }
+  .brand{
+    display:flex;
+    gap:14px;
+    align-items:center;
+  }
 
-  .title{display:flex;align-items:center;gap:14px}
   .logo{
-    width:68px;height:68px;border-radius:12px;
+    width:64px;height:64px;
+    border-radius:14px;
     background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    display:grid;place-items:center;font-weight:900;font-size:24px;color:#fff;
-    box-shadow: 0 6px 18px rgba(143,75,102,0.28);
+    display:flex;align-items:center;justify-content:center;
+    color:white;font-weight:800;font-size:18px;
+    box-shadow:var(--shadow);
+    transform:rotate(-6deg);
   }
-  h1{margin:0;font-size:20px}
-  p.lead{margin:0;color:var(--muted);font-size:13px}
+  h1{margin:0;font-size:20px;letter-spacing:0.2px}
+  p.lead{margin:0;color:#5a4b55;font-size:13px}
 
-  .gallery{
+  main.card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+    border-radius: var(--radius);
+    padding:18px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    position:relative;
+  }
+
+  .grid{
     display:grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: 1fr 380px;
+    gap:18px;
+  }
+
+  /* Responsive */
+  @media (max-width:900px){
+    .grid{grid-template-columns: 1fr;}
+    .side{order:2}
+    .gallery{order:1}
+  }
+
+  /* Gallery */
+  .gallery{
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+    min-height:360px;
+    background:linear-gradient(180deg,#fff,#fff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .slides{
+    width:100%;
+    height:100%;
+    position:relative;
+  }
+  .slide{
+    position:absolute;inset:0;
+    background-size:cover;background-position:center;
+    transition:transform .9s cubic-bezier(.2,.9,.3,1), opacity .9s;
+    opacity:0; transform:scale(1.03) translateY(10px);
+  }
+  .slide.show{
+    opacity:1; transform:scale(1) translateY(0);
+  }
+  .thumbs{
+    display:flex;gap:10px;margin-top:12px;justify-content:center;
+    flex-wrap:wrap;
+  }
+  .thumb{
+    width:68px;height:48px;border-radius:8px;overflow:hidden;
+    border:2px solid transparent;cursor:pointer;flex:0 0 auto;
+  }
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb.active{border-color:var(--accent)}
+
+  /* Side */
+  .side{
+    display:flex;
+    flex-direction:column;
     gap:12px;
   }
-  .photo{
-    position:relative;border-radius:12px;overflow:hidden;background:var(--soft);
-    border:1px solid rgba(255,255,255,0.03);
-    min-height:180px;display:flex;align-items:center;justify-content:center;
-    transition:transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .3s;
-  }
-  .photo img{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
-  .photo:hover{transform:scale(1.02);box-shadow:0 10px 40px rgba(0,0,0,0.6)}
 
-  .msg-box{
-    grid-column:1/-1;background:rgba(255,255,255,0.02);
-    border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.03);
-    display:flex;gap:12px;align-items:flex-start;
+  .names{
+    display:flex;align-items:center;gap:12px;
   }
-  .msg-avatar{width:56px;height:56px;border-radius:10px;overflow:hidden}
-  .msg-content h3{margin:0;font-size:15px}
-  .msg-content p{margin:6px 0 0;color:var(--muted);font-size:14px;line-height:1.4}
+  .names .pair{
+    background:linear-gradient(180deg, rgba(180,85,120,0.08), rgba(160,63,102,0.04));
+    padding:8px 12px;border-radius:12px;display:flex;gap:10px;align-items:center;
+    box-shadow: 0 6px 18px rgba(160,63,102,0.04);
+  }
+  .pair strong{display:block;font-size:15px;color:var(--accent-2)}
+  .pair small{display:block;color:#7b6570;font-size:12px}
 
-  .right{
-    background:rgba(255,255,255,0.01);
-    border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);
-    display:flex;flex-direction:column;gap:14px;
+  /* Message box below first image */
+  .message{
+    background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,244,247,0.98));
+    border-radius:12px;padding:14px;border:1px solid rgba(160,63,102,0.06);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+    font-size:15px;line-height:1.48;color:#3a2c33;
   }
 
+  .message .title{
+    display:flex;align-items:center;gap:10px;margin-bottom:8px;
+  }
+  .message .title .dot{
+    width:12px;height:12px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 4px 14px rgba(180,85,120,0.18);
+  }
+
+  /* Locked message area */
+  .locked{
+    background:linear-gradient(180deg,#fff,#fff);
+    border-radius:14px;padding:14px;border:1px solid rgba(160,63,102,0.06);
+    box-shadow: 0 10px 30px rgba(160,63,102,0.06);
+    min-height:140px;display:flex;flex-direction:column;gap:12px;
+    align-items:center;justify-content:center;
+  }
   .countdown{
-    background:rgba(183,107,136,0.08);
-    border-radius:12px;padding:12px;display:flex;gap:8px;justify-content:space-between;
+    display:flex;gap:12px;align-items:center;justify-content:center;
+    font-weight:700;color:var(--accent-2);
   }
-  .unit{text-align:center;padding:8px 12px;background:rgba(0,0,0,0.25);border-radius:8px;min-width:64px}
-  .num{font-weight:700;font-size:18px}
-  .label{font-size:11px;color:var(--muted)}
+  .countdown .unit{
+    background: linear-gradient(180deg,#fff,#ffeef6);
+    padding:10px 14px;border-radius:10px;border:1px solid rgba(160,63,102,0.06);
+    box-shadow: 0 8px 20px rgba(160,63,102,0.06);
+    font-size:18px;
+  }
+  .locked .hint{font-size:13px;color:#6b5660;text-align:center}
 
-  .lock-area{
-    padding:16px;border-radius:12px;background:rgba(0,0,0,0.18);
-    display:flex;flex-direction:column;align-items:center;
-    min-height:160px;gap:12px;
+  .reveal{
+    display:none;
+    animation:fadeIn .9s ease both;
   }
-  .lock-icon{
-    width:72px;height:72px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent-2),var(--accent));
-    font-size:32px;font-weight:800;color:#fff;
-  }
-  .reveal-msg{display:none;background:rgba(255,255,255,0.03);padding:14px;border-radius:10px}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
+  /* Controls */
+  .controls{display:flex;gap:10px;align-items:center;justify-content:flex-end}
   .btn{
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    border:none;color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;
+    border:0;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:white;font-weight:700;cursor:pointer;box-shadow:0 8px 30px rgba(160,63,102,0.12);
   }
-  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);font-weight:600}
-
-  /* Lightbox */
-  #lightbox{
-    position:fixed;top:0;left:0;width:100vw;height:100vh;
-    background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;
-    z-index:999;
-  }
-  #lightbox img{
-    max-width:92%;max-height:92%;border-radius:12px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.6);
+  .btn.ghost{
+    background:transparent;color:var(--accent-2);border:1px solid rgba(160,63,102,0.08);
+    box-shadow:none;font-weight:600;padding:8px 12px;
   }
 
-  @media(max-width:980px){.wrap{grid-template-columns:1fr}}
-  @media(max-width:520px){.gallery{grid-template-columns:1fr}}
+  /* Footer */
+  footer{margin-top:16px;text-align:center;color:#7a6670;font-size:13px}
+
+  /* small helpers */
+  .metatext{font-size:12px;color:#8f7b80}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  /* lock icon */
+  .lock{
+    width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(180deg, #fff, rgba(255,240,245,1));
+    border:1px solid rgba(160,63,102,0.06);
+    box-shadow:0 8px 30px rgba(160,63,102,0.06);
+    color:var(--accent-2);font-weight:900;font-size:22px;
+  }
+
+  /* small screen tweaks */
+  @media (max-width:480px){
+    body{padding:18px 12px}
+    .logo{width:56px;height:56px}
+    .gallery{min-height:260px}
+    .side{padding:6px 0}
+  }
+
+  /* nice entrance */
+  .card{animation:cardIn .7s cubic-bezier(.2,.9,.3,1) both}
+  @keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(.997)}to{opacity:1;transform:none}}
 </style>
 </head>
-
 <body>
 <div class="wrap">
-  <div class="left">
-    <div class="title">
-      <div class="logo">İ❤S</div>
+  <header>
+    <div class="brand">
+      <div class="logo">İ♥S</div>
       <div>
-        <h1>İbrahim & Sümeyye — Birlikte Daha Güçlü</h1>
-        <p class="lead">17. ayınız kutlu olsun — özel anılarınız burada.</p>
+        <h1>İbrahim &amp; Sümeyye</h1>
+        <p class="lead">Birbirine adanmış anlar — Kutlayalım</p>
       </div>
     </div>
+    <div class="controls" aria-hidden="true">
+      <button class="btn ghost" id="muteToggle" title="Müziği kapat/aç">🔊 Müzik</button>
+      <button class="btn" id="fullscreenBtn" title="Tam ekran">⤢ Tam ekran</button>
+    </div>
+  </header>
 
-    <div class="gallery">
-      <div class="photo"><img src="https://drive.google.com/uc?export=view&id=11tXmRJvtx2FxSevyQXuDKftfcSVSggqw"></div>
-      <div class="photo"><img src="https://drive.google.com/uc?export=view&id=1TvmZMnT1-v9SttRzkyhkOtXBxf76p-x_"></div>
-      <div class="photo"><img src="https://drive.google.com/uc?export=view&id=19hC698IDeoGYc5MTgUnN1eeiWBi2WybA"></div>
-      <div class="photo"><img src="https://drive.google.com/uc?export=view&id=1kE9zDph1hKyD5THt_-Vd7sEaa7tpEwqA"></div>
-
-      <div class="msg-box">
-        <div class="msg-avatar">
-          <img src="https://drive.google.com/uc?export=view&id=11tXmRJvtx2FxSevyQXuDKftfcSVSggqw">
+  <main class="card" role="main" aria-labelledby="pageTitle">
+    <div class="grid">
+      <!-- Left: Gallery + message under first image -->
+      <section class="gallery" aria-label="Fotoğraf galerisi">
+        <div class="slides" id="slides" aria-live="polite">
+          <!-- Slides will be generated by JS -->
         </div>
-        <div class="msg-content">
-          <h3>İbrahim'den Sümeyye'ye</h3>
-          <p>Her sabah seninle uyanmak, seninle gülmek ve seninle büyümek — 17 ayı devirdik. Seni seviyorum.</p>
+
+        <!-- thumbnails -->
+        <div style="position:absolute;left:0;right:0;bottom:12px;padding:0 12px;">
+          <div class="thumbs" id="thumbs" aria-hidden="false">
+            <!-- thumbs injected -->
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <aside class="right">
-    <div style="display:flex;justify-content:space-between">
-      <div>
-        <strong>Gizli Yılbaşı Mesajı</strong>
-        <div style="font-size:13px;color:var(--muted)">Sayaç bitince otomatik açılır.</div>
-      </div>
-      <div>
-        <div style="font-size:13px;color:var(--muted)">Tarih hedefi:</div>
-        <div id="target-date" style="font-weight:700">—</div>
-      </div>
-    </div>
+      </section>
 
-    <div class="countdown">
-      <div class="unit"><div class="num" id="days">--</div><div class="label">Gün</div></div>
-      <div class="unit"><div class="num" id="hours">--</div><div class="label">Saat</div></div>
-      <div class="unit"><div class="num" id="minutes">--</div><div class="label">Dakika</div></div>
-      <div class="unit"><div class="num" id="seconds">--</div><div class="label">Saniye</div></div>
-      <button class="btn ghost" id="resetButton">Aç (zorla)</button>
-    </div>
+      <!-- Right: side panel -->
+      <aside class="side" aria-label="Bilgiler ve mesajlar">
+        <div class="names" role="contentinfo">
+          <div class="pair" title="İsimler">
+            <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;">İ</div>
+            <div>
+              <strong>İbrahim</strong>
+              <small>Sonsuzca bağlı</small>
+            </div>
+          </div>
+          <div class="pair" title="İsimler">
+            <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent-2),var(--accent));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;">S</div>
+            <div>
+              <strong>Sümeyye</strong>
+              <small>Kalp atışı</small>
+            </div>
+          </div>
+        </div>
 
-    <div class="lock-area">
-      <div class="lock-icon">🔒</div>
-      <div id="locked-heading" style="color:var(--muted)">Yılbaşına kadar bu mesaj kilitli.</div>
+        <!-- First message (must be under first visual) -->
+        <div class="message" id="firstMessage" aria-labelledby="firstMsgTitle">
+          <div class="title"><div class="dot" aria-hidden="true"></div><div><strong id="firstMsgTitle">Sevgiden Gelen Sözler</strong><div class="metatext">17. ay mesajı — İbrahim'den Sümeyye'ye</div></div></div>
+          <div id="messageBody">
+            Kalbim, Ömrüm, Hayatım, Her şeyim ❤️ Bugün birlikteliğimizin 17.ayı ve ben seninle geçirdiğim her saniye için çok mutluyum. Senin hayatımda olmandan çok mutluyum. Hayatında olmaktan çok mutluyum. Seninle olmaktan çok mutluyum. Dile kolay beraber 519.günümüz ❤️❤️ 519 kere maşallah bize. Seninle olmaktan o kadar keyif alıyorum ki bunu inan tahmin bile edemezsin. Sen hayatımın en özel parçasısın ve son nefesime kadar da öyle olucaksın. Yanımda olduğun her saniye için teşekkür ederim güzel sevgilim. Seni çok seviyorum ❤️ 17.ayımız kutlu olsun kahve gözlüm 🤎🤎
+          </div>
+        </div>
 
-      <div class="reveal-msg" id="revealMsg">
-        <h3>Mutlu Yıllar!</h3>
-        <p>Yeni yılınız umut, huzur ve daha çok birlikte anıyla dolsun.</p>
-      </div>
+        <!-- Locked message with countdown above -->
+        <div class="locked" aria-live="polite" id="lockedArea" aria-hidden="false">
+          <div class="lock" aria-hidden="true">🔒</div>
+          <div class="countdown" id="countdown" aria-hidden="false">
+            <div class="unit"><span id="days">—</span><div style="font-size:11px;font-weight:600;margin-top:4px">Gün</div></div>
+            <div class="unit"><span id="hours">—</span><div style="font-size:11px;font-weight:600;margin-top:4px">Saat</div></div>
+            <div class="unit"><span id="minutes">—</span><div style="font-size:11px;font-weight:600;margin-top:4px">Dakika</div></div>
+            <div class="unit"><span id="seconds">—</span><div style="font-size:11px;font-weight:600;margin-top:4px">Saniye</div></div>
+          </div>
+          <div class="hint">Bu mesaj yalnızca sayaç sıfırlandığında otomatik olarak açılacak. Manuel açma yoktur.</div>
+
+          <!-- locked message content (hidden until timer ends) -->
+          <div id="lockedMessage" class="reveal" style="width:100%;text-align:left;padding-top:10px;display:none;">
+            <div style="font-weight:800;color:var(--accent-2);font-size:16px;margin-bottom:8px">Yeni Yıl Mesajı</div>
+            <div style="background:linear-gradient(180deg,#fff,#fff);padding:12px;border-radius:10px;border:1px solid rgba(160,63,102,0.06);">
+              <p style="margin:0;color:#4b3940;line-height:1.5;">
+                Sevgilim, yeni yıl bize yeni anılar, yeni umutlar ve birlikte daha çok gülme fırsatı getirsin. Her günün bir öncekinden daha özel olsun. Seni her zamankinden daha çok seviyorum.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <div id="credits">Oluşturuldu: <strong>İbrahim &amp; Sümeyye</strong> · Tasarım: <span class="metatext">Minimal &amp; Romantik</span></div>
+          <div style="margin-top:8px" class="metatext">Not: Müzik tarayıcı politikaları nedeniyle otomatik çalmayı kısıtlayabilir.</div>
+        </footer>
+      </aside>
     </div>
-  </aside>
+  </main>
 </div>
 
-<!-- Lightbox -->
-<div id="lightbox"><img id="lightbox-img" src=""></div>
+<!-- YouTube iframe for autoplay music (hidden) -->
+<div style="display:none" aria-hidden="true">
+  <!-- YouTube embed: autoplay=1, controls=0, loop=1, rel=0 -->
+  <iframe id="ytplayer" width="560" height="315"
+    src="https://www.youtube.com/embed/PY-jid_6RT0?autoplay=1&controls=0&loop=1&rel=0&modestbranding=1&enablejsapi=1&playlist=PY-jid_6RT0"
+    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
 
 <script>
-// Next New Year
-function getNextNY(){
-  const n=new Date();
-  return new Date(n.getFullYear()+1,0,1,0,0,0);
-}
-const target=getNextNY();
-document.getElementById("target-date").textContent=target.toLocaleString("tr-TR",{year:"numeric",month:"long",day:"numeric",hour:"2-digit",minute:"2-digit"});
+/* -------------------------
+  CONFIG
+   - Image IDs extracted from provided Drive links
+   - Countdown target: Yeni yıl (1 Jan 2026 00:00 Istanbul time)
+   - No manual reveal of locked message
+*/
+const driveImageIds = [
+  '11tXmRJvtx2FxSevyQXuDKftfcSVSggqw',
+  '1TvmZMnT1-v9SttRzkyhkOtXBxf76p-x_',
+  '19hC698IDeoGYc5MTgUnN1eeiWBi2WybA',
+  '1kE9zDph1hKyD5THt_-Vd7sEaa7tpEwqA'
+];
 
-function tick(){
-  const now=new Date();
-  const diff=target-now;
-  if(diff<=0){unlock();return;}
-  const s=Math.floor(diff/1000);
-  const d=Math.floor(s/86400);
-  const h=Math.floor((s%86400)/3600);
-  const m=Math.floor((s%3600)/60);
-  const sec=s%60;
-  days.textContent=String(d).padStart(2,"0");
-  hours.textContent=String(h).padStart(2,"0");
-  minutes.textContent=String(m).padStart(2,"0");
-  seconds.textContent=String(sec).padStart(2,"0");
-}
-setInterval(tick,1000); tick();
-
-function unlock(){
-  revealMsg.style.display="block";
-  locked-heading.textContent="Mesaj açıldı!";
-  document.querySelector(".lock-icon").textContent="🎉";
+// Helper to get direct view link for Google Drive previewable images
+function driveViewUrl(id){
+  return `https://drive.google.com/uc?export=view&id=${id}`;
 }
 
-resetButton.onclick=()=>{unlock()};
+/* ----- Build Gallery ----- */
+const slidesEl = document.getElementById('slides');
+const thumbsEl = document.getElementById('thumbs');
 
-// Lightbox
-document.querySelectorAll(".photo img").forEach(img=>{
-  img.onclick=()=>{
-    lightbox.style.display="flex";
-    document.getElementById("lightbox-img").src=img.src;
+let current = 0;
+const slides = [];
+
+function createSlides(){
+  driveImageIds.forEach((id, idx) => {
+    const url = driveViewUrl(id);
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.06), rgba(255,240,245,0.02)), url("${url}")`;
+    slide.setAttribute('role','img');
+    slide.setAttribute('aria-label', `Fotoğraf ${idx+1}`);
+    if(idx === 0) slide.classList.add('show');
+    slidesEl.appendChild(slide);
+    slides.push(slide);
+
+    // thumb
+    const t = document.createElement('div');
+    t.className = 'thumb' + (idx===0? ' active':'');
+    t.innerHTML = `<img src="${url}" alt="thumb-${idx+1}">`;
+    t.addEventListener('click', ()=>{ goTo(idx); });
+    thumbsEl.appendChild(t);
+  });
+}
+createSlides();
+
+function goTo(idx){
+  if(idx===current) return;
+  slides[current].classList.remove('show');
+  thumbsEl.children[current].classList.remove('active');
+  current = idx;
+  slides[current].classList.add('show');
+  thumbsEl.children[current].classList.add('active');
+}
+
+/* autoplay slideshow */
+let slideTimer = setInterval(()=>{
+  let next = (current+1) % slides.length;
+  goTo(next);
+}, 5200);
+
+/* Pause autoplay on touch/hover to let user explore */
+slidesEl.addEventListener('mouseenter', ()=> clearInterval(slideTimer));
+slidesEl.addEventListener('mouseleave', ()=> slideTimer = setInterval(()=>{
+  let next = (current+1) % slides.length;
+  goTo(next);
+}, 5200));
+
+/* -------------------------
+  Countdown logic
+  Target: 2026-01-01 00:00:00 Europe/Istanbul
+  We'll compute using user's local timezone; for maximum clarity we set exact date/time.
+--------------------------*/
+
+// Construct the target Date time in local timezone corresponding to 2026-01-01 00:00:00
+// IMPORTANT: create with ISO and treat as local by omitting 'Z'.
+const targetYear = (new Date()).getFullYear() >= 2026 ? 2027 : 2026; // if already past 2026, adjust (defensive)
+const targetString = `${targetYear}-01-01T00:00:00`; // local time
+const targetDate = new Date(targetString);
+
+const daysEl = document.getElementById('days');
+const hoursEl = document.getElementById('hours');
+const minutesEl = document.getElementById('minutes');
+const secondsEl = document.getElementById('seconds');
+const lockedArea = document.getElementById('lockedArea');
+const lockedMessage = document.getElementById('lockedMessage');
+const countdownEl = document.getElementById('countdown');
+
+function updateCountdown(){
+  const now = new Date();
+  let diff = Math.max(0, targetDate - now);
+  // Calculate
+  const s = Math.floor(diff / 1000);
+  const days = Math.floor(s / (3600*24));
+  const hours = Math.floor((s % (3600*24)) / 3600);
+  const minutes = Math.floor((s % 3600) / 60);
+  const seconds = Math.floor(s % 60);
+
+  daysEl.textContent = String(days).padStart(2,'0');
+  hoursEl.textContent = String(hours).padStart(2,'0');
+  minutesEl.textContent = String(minutes).padStart(2,'0');
+  secondsEl.textContent = String(seconds).padStart(2,'0');
+
+  if(diff <= 0){
+    // Reveal locked message automatically and disable the countdown visual
+    revealLockedMessage();
+    clearInterval(countInterval);
+  }
+}
+
+// Start updating immediately
+updateCountdown();
+const countInterval = setInterval(updateCountdown, 1000);
+
+/* MAKE SURE USER CANNOT OPEN MESSAGE MANUALLY
+   - hide reveal content until timer hits zero
+   - remove any pointer events or controls to open
+*/
+function revealLockedMessage(){
+  // ensure it's only revealed by timer
+  lockedMessage.style.display = 'block';
+  // animate and remove lock UI
+  const lockIcon = lockedArea.querySelector('.lock');
+  if(lockIcon) lockIcon.style.opacity = '0';
+  // hide countdown after short fade
+  countdownEl.style.display = 'none';
+  const hints = lockedArea.querySelector('.hint');
+  if(hints) hints.style.display = 'none';
+  // Expand reveal area
+  lockedArea.style.minHeight = 'auto';
+}
+
+/* -------------------------
+  YouTube autoplay handling + mute toggle
+  - Some browsers block autoplay with sound.
+  - We'll attempt to play using the iframe API (postMessage) and provide a mute toggle.
+--------------------------*/
+const ytFrame = document.getElementById('ytplayer');
+const muteToggle = document.getElementById('muteToggle');
+let isMuted = false; // track state
+
+// We'll attempt to send play command via postMessage using YouTube IFrame API commands
+function postMessageToYt(command, args){
+  if(!ytFrame || !ytFrame.contentWindow) return;
+  ytFrame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: command, args: args || [] }), '*');
+}
+
+// On load, try to play (some browsers will block)
+function tryPlayYT(){
+  // Play (attempt)
+  postMessageToYt('playVideo');
+  // Try unmute (some browsers require user gesture; we allow user to toggle)
+  if(!isMuted) postMessageToYt('unMute');
+}
+tryPlayYT();
+
+// Mute toggle button behavior: toggles mute/unmute
+muteToggle.addEventListener('click', ()=>{
+  isMuted = !isMuted;
+  if(isMuted){
+    postMessageToYt('mute');
+    muteToggle.textContent = '🔇 Müzik';
+  } else {
+    postMessageToYt('unMute');
+    muteToggle.textContent = '🔊 Müzik';
   }
 });
-lightbox.onclick=()=>{lightbox.style.display="none";}
-</script>
 
+/* Fullscreen */
+const fullscreenBtn = document.getElementById('fullscreenBtn');
+fullscreenBtn.addEventListener('click', ()=>{
+  const el = document.documentElement;
+  if(!document.fullscreenElement){
+    el.requestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
+  }
+});
+
+/* Accessibility: keyboard shortcuts */
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'm' || e.key === 'M') {
+    muteToggle.click();
+  } else if(e.key === 'f' || e.key === 'F'){
+    fullscreenBtn.click();
+  }
+});
+
+/* Defensive: prevent manual reveal attempts by removing context menu on locked area */
+lockedArea.addEventListener('contextmenu', (e)=> e.preventDefault());
+
+/* Extra polish: reveal small animation when first message is read */
+const firstMessage = document.getElementById('firstMessage');
+firstMessage.addEventListener('click', ()=> {
+  firstMessage.style.transform = 'translateY(-3px)';
+  setTimeout(()=> firstMessage.style.transform = '', 300);
+});
+
+/* Prevent selecting locked message content until revealed */
+lockedMessage.style.userSelect = 'none';
+function enableLockedSelection(){
+  lockedMessage.style.userSelect = 'text';
+}
+
+/* When reveal happens, enable selection */
+const observer = new MutationObserver(()=> {
+  if(lockedMessage.style.display !== 'none'){
+    enableLockedSelection();
+  }
+});
+observer.observe(lockedMessage, { attributes: true, childList: true, subtree: true });
+
+/* Small progressive enhancement: if autoplay blocked, show a hint */
+let autoplayAllowed = true;
+setTimeout(()=>{
+  // If iframe hasn't started and countdown area still shows (some heuristic), show hint
+  // (we won't add UI to break the "no manual open" rule for locked message)
+  // Instead, update footer text
+  const credits = document.getElementById('credits');
+  credits.innerHTML += ' · <span class="metatext">Eğer müzik otomatik başlamazsa tarayıcı ses kısıtlaması aktif olabilir.</span>';
+}, 2500);
+
+/* Safety: ensure image loading fallback */
+slides.forEach((s, idx)=>{
+  const url = driveViewUrl(driveImageIds[idx]);
+  const img = new Image();
+  img.onload = ()=>{/* ok */};
+  img.onerror = ()=>{
+    s.style.background = 'linear-gradient(180deg,#fff,#fff)';
+    s.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#8b6b72;font-weight:700">Görsel yüklenemedi</div>`;
+  };
+  img.src = url;
+});
+
+/* End of script */
+</script>
 </body>
 </html>
