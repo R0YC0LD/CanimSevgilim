@@ -4,563 +4,726 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>İbrahim ♥ Sümeyye — Yıldönümü</title>
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#fff;
-    --accent:#b45578; /* hafif koyu pembe-mürdüm arası */
-    --accent-2:#a03f66;
-    --muted:#f7f5f7;
-    --card:#ffffff;
-    --shadow: 0 8px 30px rgba(160,63,102,0.12);
-    --glass: rgba(255,255,255,0.6);
+    --card:#fff;
+    --accent:#c86b86; /* hafif koyu pembe */
+    --accent-2:#b44f6a;
+    --muted:#a8a8a8;
+    --glass: rgba(255,255,255,0.7);
+    --shadow: 0 10px 30px rgba(15,15,15,0.08);
     --radius:18px;
-    --max-width:980px;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0;
     font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: linear-gradient(180deg, #fff 0%, #fffafc 100%);
-    color:#222;
+    background: linear-gradient(180deg, #fff 0%, #fff 65%, #fff0f3 100%);
+    color:#111;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:32px 18px;
+    padding:24px;
   }
 
-  .wrap{
+  /* Container */
+  .site {
     width:100%;
-    max-width:var(--max-width);
-    margin:0 auto;
+    max-width:980px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,249,250,0.98));
+    border-radius:26px;
+    box-shadow: var(--shadow);
+    overflow:hidden;
+    min-height:640px;
+    display:flex;
+    flex-direction:column;
   }
 
   header{
+    padding:20px 28px;
     display:flex;
-    gap:16px;
     align-items:center;
     justify-content:space-between;
-    margin-bottom:22px;
+    gap:12px;
+    border-bottom: 1px solid rgba(200,200,200,0.08);
+    background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,247,249,0.6));
   }
   .brand{
     display:flex;
     gap:14px;
     align-items:center;
   }
-
   .logo{
-    width:64px;height:64px;
-    border-radius:14px;
+    width:66px;height:66px;border-radius:16px;
     background:linear-gradient(135deg,var(--accent),var(--accent-2));
     display:flex;align-items:center;justify-content:center;
-    color:white;font-weight:800;font-size:18px;
-    box-shadow:var(--shadow);
-    transform:rotate(-6deg);
+    color:white;font-weight:900;font-size:22px;
+    box-shadow: 0 6px 18px rgba(180,80,110,0.18);
   }
-  h1{margin:0;font-size:20px;letter-spacing:0.2px}
-  p.lead{margin:0;color:#5a4b55;font-size:13px}
+  .title{
+    line-height:1;
+  }
+  .title h1{margin:0;font-size:20px; font-weight:700; color:#2b2b2b}
+  .title p{margin:0;font-size:12px;color:var(--muted)}
 
-  main.card{
-    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
-    border-radius: var(--radius);
-    padding:18px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
-    position:relative;
+  nav{display:flex; gap:8px; align-items:center;}
+  .btn{
+    border:0;padding:10px 14px;border-radius:12px;background:transparent;color:var(--accent-2);font-weight:700;
+    cursor:pointer; transition:all .22s; display:inline-flex; gap:8px; align-items:center;
+  }
+  .btn:hover{transform:translateY(-3px); filter:brightness(1.03)}
+  .btn.primary{
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:white; box-shadow: 0 8px 18px rgba(180,80,110,0.14);
   }
 
-  .grid{
+  /* Main content layout */
+  .main{
+    padding:28px;
     display:grid;
-    grid-template-columns: 1fr 380px;
-    gap:18px;
+    grid-template-columns: 1fr 360px;
+    gap:24px;
+    align-items:start;
   }
 
-  /* Responsive */
-  @media (max-width:900px){
-    .grid{grid-template-columns: 1fr;}
-    .side{order:2}
-    .gallery{order:1}
+  /* Mobile adapt */
+  @media(max-width:900px){
+    .main{grid-template-columns:1fr; padding:18px;}
+    .site{min-height:100vh;border-radius:0;}
+    header{padding:14px}
+    .logo{width:56px;height:56px}
   }
 
-  /* Gallery */
-  .gallery{
-    border-radius:12px;
-    overflow:hidden;
-    position:relative;
-    min-height:360px;
-    background:linear-gradient(180deg,#fff,#fff);
-    display:flex;
-    align-items:center;
-    justify-content:center;
+  /* Left column (hero + images) */
+  .hero{
+    background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,246,248,0.85));
+    padding:18px;border-radius:16px; box-shadow: 0 6px 20px rgba(150,80,110,0.04);
+  }
+  .hero .hero-top{
+    display:flex;gap:18px;align-items:center;
+  }
+  .heartbeat{
+    width:100%; height:320px; border-radius:14px; overflow:hidden; position:relative;
+    background:linear-gradient(180deg,#fff0f4, #fff);
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.6);
   }
   .slides{
-    width:100%;
-    height:100%;
-    position:relative;
+    width:100%;height:100%;display:flex;transition:transform .8s cubic-bezier(.2,.9,.26,1);
   }
   .slide{
-    position:absolute;inset:0;
-    background-size:cover;background-position:center;
-    transition:transform .9s cubic-bezier(.2,.9,.3,1), opacity .9s;
-    opacity:0; transform:scale(1.03) translateY(10px);
+    min-width:100%; height:100%; position:relative; display:flex;align-items:center;justify-content:center;
+    background:#fef6f8;
   }
-  .slide.show{
-    opacity:1; transform:scale(1) translateY(0);
-  }
-  .thumbs{
-    display:flex;gap:10px;margin-top:12px;justify-content:center;
-    flex-wrap:wrap;
-  }
-  .thumb{
-    width:68px;height:48px;border-radius:8px;overflow:hidden;
-    border:2px solid transparent;cursor:pointer;flex:0 0 auto;
-  }
-  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-  .thumb.active{border-color:var(--accent)}
+  .slide img{width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.02) saturate(1.02);}
 
-  /* Side */
+  .slide-overlay{
+    position:absolute; left:18px; bottom:18px; background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+    padding:12px 14px; border-radius:12px; box-shadow: 0 6px 20px rgba(180,70,110,0.08); max-width:70%;
+  }
+  .slide-indicators{position:absolute; right:14px; bottom:14px; display:flex; gap:8px}
+
+  .dot{
+    width:10px;height:10px;border-radius:50%; background:rgba(255,255,255,0.7); border:2px solid rgba(200,200,200,0.4);
+    transition:all .18s;
+  }
+  .dot.active{transform:scale(1.25);background:var(--accent)}
+
+  /* Message card under first image */
+  .message-card{
+    margin-top:16px; background:linear-gradient(180deg,#fff,#fff); border-radius:12px;
+    padding:14px; border:1px solid rgba(200,100,120,0.08); box-shadow: 0 6px 18px rgba(150,70,100,0.04);
+  }
+  .message-card h3{margin:0 0 8px 0;color:var(--accent-2);font-size:16px}
+  .message-text{white-space:pre-wrap;color:#2b2b2b; font-size:15px; line-height:1.45}
+
+  /* Right column (controls + locked message) */
   .side{
+    position:relative;
     display:flex;
     flex-direction:column;
-    gap:12px;
+    gap:16px;
+  }
+  .card{
+    background:var(--card); padding:16px;border-radius:14px; box-shadow: 0 8px 30px rgba(150,70,100,0.04);
+  }
+  .controls{display:flex; gap:10px; flex-wrap:wrap;}
+  .small{
+    font-size:13px; color:var(--muted)
   }
 
-  .names{
-    display:flex;align-items:center;gap:12px;
-  }
-  .names .pair{
-    background:linear-gradient(180deg, rgba(180,85,120,0.08), rgba(160,63,102,0.04));
-    padding:8px 12px;border-radius:12px;display:flex;gap:10px;align-items:center;
-    box-shadow: 0 6px 18px rgba(160,63,102,0.04);
-  }
-  .pair strong{display:block;font-size:15px;color:var(--accent-2)}
-  .pair small{display:block;color:#7b6570;font-size:12px}
-
-  /* Message box below first image */
-  .message{
-    background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,244,247,0.98));
-    border-radius:12px;padding:14px;border:1px solid rgba(160,63,102,0.06);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-    font-size:15px;line-height:1.48;color:#3a2c33;
-  }
-
-  .message .title{
-    display:flex;align-items:center;gap:10px;margin-bottom:8px;
-  }
-  .message .title .dot{
-    width:12px;height:12px;border-radius:50%;
-    background:var(--accent);
-    box-shadow:0 4px 14px rgba(180,85,120,0.18);
-  }
-
-  /* Locked message area */
+  /* Locked message + countdown */
   .locked{
-    background:linear-gradient(180deg,#fff,#fff);
-    border-radius:14px;padding:14px;border:1px solid rgba(160,63,102,0.06);
-    box-shadow: 0 10px 30px rgba(160,63,102,0.06);
-    min-height:140px;display:flex;flex-direction:column;gap:12px;
-    align-items:center;justify-content:center;
+    display:flex; flex-direction:column; gap:12px; align-items:center; justify-content:center;
+    padding:18px; text-align:center;
   }
-  .countdown{
-    display:flex;gap:12px;align-items:center;justify-content:center;
-    font-weight:700;color:var(--accent-2);
+  .count{
+    font-weight:800; color:var(--accent-2); font-size:28px;
+    background:linear-gradient(90deg,#fff,#fff0f4); padding:10px 12px; border-radius:10px;
+    box-shadow: 0 10px 30px rgba(180,80,110,0.06);
   }
-  .countdown .unit{
-    background: linear-gradient(180deg,#fff,#ffeef6);
-    padding:10px 14px;border-radius:10px;border:1px solid rgba(160,63,102,0.06);
-    box-shadow: 0 8px 20px rgba(160,63,102,0.06);
-    font-size:18px;
+  .locked .padlock{
+    width:62px;height:62px;border-radius:12px; background:linear-gradient(180deg,#fff,#fff0f4);
+    display:flex;align-items:center;justify-content:center; font-size:28px; color:var(--accent-2);
+    box-shadow: 0 8px 24px rgba(180,80,110,0.06);
   }
-  .locked .hint{font-size:13px;color:#6b5660;text-align:center}
+  .locked p{margin:0;color:var(--muted); font-size:14px;}
 
-  .reveal{
-    display:none;
-    animation:fadeIn .9s ease both;
-  }
-  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-  /* Controls */
-  .controls{display:flex;gap:10px;align-items:center;justify-content:flex-end}
-  .btn{
-    border:0;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent-2));
-    color:white;font-weight:700;cursor:pointer;box-shadow:0 8px 30px rgba(160,63,102,0.12);
-  }
-  .btn.ghost{
-    background:transparent;color:var(--accent-2);border:1px solid rgba(160,63,102,0.08);
-    box-shadow:none;font-weight:600;padding:8px 12px;
+  .year-message{
+    display:none; margin-top:10px; text-align:left; padding:14px; border-radius:12px; background:linear-gradient(180deg,#fff,#fff0f4);
+    border:1px solid rgba(200,100,120,0.06);
+    color:#2b2b2b; white-space:pre-wrap; line-height:1.45;
   }
 
-  /* Footer */
-  footer{margin-top:16px;text-align:center;color:#7a6670;font-size:13px}
+  /* Footer / navigation inside page */
+  .page-nav{display:flex; gap:8px; margin-top:6px;}
+  .ghost{background:transparent;border:0;color:var(--accent-2); font-weight:700; cursor:pointer}
+
+  /* Gallery page */
+  .gallery{
+    padding:18px; display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+  }
+  @media(max-width:600px){.gallery{grid-template-columns:1fr}}
+
+  .gimg{
+    width:100%; aspect-ratio: 4/3; overflow:hidden; border-radius:12px; position:relative;
+    background:linear-gradient(180deg,#fff0f3,#fff);
+  }
+  .gimg img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .6s}
+  .gimg:hover img{transform:scale(1.04)}
+
+  /* big play overlay for audio fallback */
+  .audio-overlay{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    pointer-events:none;
+  }
+  .play-cta{
+    pointer-events:auto;
+    background: linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:white; border-radius:999px; padding:12px 18px; font-weight:800; font-size:16px;
+    box-shadow: 0 12px 28px rgba(180,80,110,0.18);
+    display:flex; gap:10px; align-items:center; cursor:pointer;
+  }
 
   /* small helpers */
-  .metatext{font-size:12px;color:#8f7b80}
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .muted-note{font-size:12px;color:var(--muted)}
+  .center{display:flex; align-items:center; justify-content:center}
 
-  /* lock icon */
-  .lock{
-    width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(180deg, #fff, rgba(255,240,245,1));
-    border:1px solid rgba(160,63,102,0.06);
-    box-shadow:0 8px 30px rgba(160,63,102,0.06);
-    color:var(--accent-2);font-weight:900;font-size:22px;
+  /* subtle floating heart animation */
+  .floating-heart{
+    position:absolute; right:12px; top:-28px; font-size:42px; transform:rotate(-12deg);
+    color:var(--accent-2); opacity:0.12;
   }
 
-  /* small screen tweaks */
-  @media (max-width:480px){
-    body{padding:18px 12px}
-    .logo{width:56px;height:56px}
-    .gallery{min-height:260px}
-    .side{padding:6px 0}
-  }
-
-  /* nice entrance */
-  .card{animation:cardIn .7s cubic-bezier(.2,.9,.3,1) both}
-  @keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(.997)}to{opacity:1;transform:none}}
+  /* transition between "pages" */
+  section.page{display:none;padding:18px}
+  section.page.active{display:block}
+  .fade-enter{animation:fadeIn .5s ease both}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)}}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="site" role="main" aria-label="İbrahim ve Sümeyye yıldönümü sitesi">
   <header>
     <div class="brand">
-      <div class="logo">İ♥S</div>
-      <div>
-        <h1>İbrahim &amp; Sümeyye</h1>
-        <p class="lead">Birbirine adanmış anlar — Kutlayalım</p>
+      <div class="logo" aria-hidden="true">İ♥S</div>
+      <div class="title">
+        <h1>İbrahim ♥ Sümeyye</h1>
+        <p>17. Ay — 519. Gün — Özel yıldönümü sayfası</p>
       </div>
     </div>
-    <div class="controls" aria-hidden="true">
-      <button class="btn ghost" id="muteToggle" title="Müziği kapat/aç">🔊 Müzik</button>
-      <button class="btn" id="fullscreenBtn" title="Tam ekran">⤢ Tam ekran</button>
-    </div>
+
+    <nav>
+      <button class="btn" data-nav="home">Ana Sayfa</button>
+      <button class="btn" data-nav="biz">Biz</button>
+      <button class="btn" data-nav="yil" id="yilBtn">Yılbaşı Mesajı</button>
+      <button class="btn primary" id="fullscreenBtn">Tam Ekran</button>
+    </nav>
   </header>
 
-  <main class="card" role="main" aria-labelledby="pageTitle">
-    <div class="grid">
-      <!-- Left: Gallery + message under first image -->
-      <section class="gallery" aria-label="Fotoğraf galerisi">
-        <div class="slides" id="slides" aria-live="polite">
-          <!-- Slides will be generated by JS -->
-        </div>
+  <!-- PAGES -->
+  <main class="main">
+    <!-- LEFT / HOME -->
+    <div class="hero">
+      <section id="home" class="page active fade-enter" aria-live="polite">
+        <div class="hero-top">
+          <div style="flex:1">
+            <div class="heartbeat" id="slideshow" aria-hidden="false">
+              <div class="floating-heart">❤</div>
+              <div class="slides" id="slides">
+                <!-- Slides populated by JS -->
+              </div>
 
-        <!-- thumbnails -->
-        <div style="position:absolute;left:0;right:0;bottom:12px;padding:0 12px;">
-          <div class="thumbs" id="thumbs" aria-hidden="false">
-            <!-- thumbs injected -->
+              <div style="position:absolute; left:18px; top:18px;">
+                <div class="slide-overlay">
+                  <strong style="display:block">İbrahim & Sümeyye</strong>
+                  <small class="muted-note">Birlikte paylaşılan anılar — her fotoğraf bir anı saklar.</small>
+                </div>
+              </div>
+
+              <div class="slide-indicators" id="indicators" aria-hidden="true"></div>
+
+              <!-- audio overlay for play CTA -->
+              <div class="audio-overlay" id="audioOverlay" style="display:none">
+                <button class="play-cta" id="playFallback"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="transform:translateY(-1px)"><path d="M5 3v18l15-9L5 3z" fill="currentColor"/></svg>Şarkıyı Başlat</button>
+              </div>
+            </div>
+
+            <!-- message card under first image -->
+            <div class="message-card" aria-labelledby="mesaj-baslik">
+              <h3 id="mesaj-baslik">İbrahim'den Sümeyye'ye</h3>
+              <div class="message-text" id="loveMessage">
+Kalbim, Ömrüm, Hayatım, Her şeyim ❤️ Bugün birlikteliğimizin 17.ayı ve ben seninle geçirdiğim her saniye için çok mutluyum. Senin hayatımda olmandan çok mutluyum. Hayatında olmaktan çok mutluyum. Seninle olmaktan çok mutluyum. Dile kolay beraber 519.günümüz ❤️❤️ 519 kere maşallah bize. Seninle olmaktan o kadar keyif alıyorum ki bunu inan tahmin bile edemezsin. Sen hayatımın en özel parçasısın ve son nefesime kadar da öyle olucaksun. Yanımda olduğun her saniye için teşekkür ederim güzel sevgilim. Seni çok seviyorum ❤️ 17.ayımız kutlu olsun kahve gözlüm 🤎🤎
+              </div>
+            </div>
           </div>
         </div>
-
       </section>
 
-      <!-- Right: side panel -->
-      <aside class="side" aria-label="Bilgiler ve mesajlar">
-        <div class="names" role="contentinfo">
-          <div class="pair" title="İsimler">
-            <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;">İ</div>
-            <div>
-              <strong>İbrahim</strong>
-              <small>Sonsuzca bağlı</small>
+      <!-- GALLERY PAGE -->
+      <section id="biz" class="page fade-enter" aria-hidden="true">
+        <h2 style="margin:0 0 8px 0; color:var(--accent-2)">Biz</h2>
+        <p class="small" style="margin:0 0 14px 0">Düğmeye basınca buraya geldin — dört fotoğraf burada. Dokununca büyüt.</p>
+        <div class="gallery" id="galleryGrid" aria-live="polite">
+          <!-- images by JS -->
+        </div>
+      </section>
+
+      <!-- YEAR PAGE -->
+      <section id="yil" class="page fade-enter" aria-hidden="true">
+        <h2 style="margin:0 0 8px 0; color:var(--accent-2)">Yılbaşı Mesajı</h2>
+        <p class="small" style="margin:0 0 14px 0">Bu sayfada bir sayaç var. Sayaç 0 olunca yılbaşı mesajı otomatik açılacak. Başka bir yolla açılamaz.</p>
+
+        <div class="card locked" role="region" aria-label="Yılbaşı kilidi">
+          <div class="padlock" style="display:flex; gap:12px; align-items:center; justify-content:center">
+            <div class="padlock-inner">
+              <div class="padlock" aria-hidden="true" style="width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,#fff,#fff0f4);display:flex;align-items:center;justify-content:center;color:var(--accent-2);box-shadow:0 6px 18px rgba(180,80,110,0.06)">🔒</div>
             </div>
           </div>
-          <div class="pair" title="İsimler">
-            <div style="width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent-2),var(--accent));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;">S</div>
-            <div>
-              <strong>Sümeyye</strong>
-              <small>Kalp atışı</small>
-            </div>
+          <div>
+            <div class="count" id="countdown" aria-live="polite">-- gün --:--:--</div>
+            <p style="margin-top:8px">Sayaç bitince yılbaşı mesajı otomatik açılacak. Sadece bekle — başka bir yol yok.</p>
           </div>
-        </div>
 
-        <!-- First message (must be under first visual) -->
-        <div class="message" id="firstMessage" aria-labelledby="firstMsgTitle">
-          <div class="title"><div class="dot" aria-hidden="true"></div><div><strong id="firstMsgTitle">Sevgiden Gelen Sözler</strong><div class="metatext">17. ay mesajı — İbrahim'den Sümeyye'ye</div></div></div>
-          <div id="messageBody">
-            Kalbim, Ömrüm, Hayatım, Her şeyim ❤️ Bugün birlikteliğimizin 17.ayı ve ben seninle geçirdiğim her saniye için çok mutluyum. Senin hayatımda olmandan çok mutluyum. Hayatında olmaktan çok mutluyum. Seninle olmaktan çok mutluyum. Dile kolay beraber 519.günümüz ❤️❤️ 519 kere maşallah bize. Seninle olmaktan o kadar keyif alıyorum ki bunu inan tahmin bile edemezsin. Sen hayatımın en özel parçasısın ve son nefesime kadar da öyle olucaksın. Yanımda olduğun her saniye için teşekkür ederim güzel sevgilim. Seni çok seviyorum ❤️ 17.ayımız kutlu olsun kahve gözlüm 🤎🤎
-          </div>
-        </div>
+          <div class="year-message" id="yearMessage" aria-hidden="true">
+            <!-- year message inserted by JS -->
+            <strong>Mutlu Yıllar Aşkım!</strong>
 
-        <!-- Locked message with countdown above -->
-        <div class="locked" aria-live="polite" id="lockedArea" aria-hidden="false">
-          <div class="lock" aria-hidden="true">🔒</div>
-          <div class="countdown" id="countdown" aria-hidden="false">
-            <div class="unit"><span id="days">—</span><div style="font-size:11px;font-weight:600;margin-top:4px">Gün</div></div>
-            <div class="unit"><span id="hours">—</span><div style="font-size:11px;font-weight:600;margin-top:4px">Saat</div></div>
-            <div class="unit"><span id="minutes">—</span><div style="font-size:11px;font-weight:600;margin-top:4px">Dakika</div></div>
-            <div class="unit"><span id="seconds">—</span><div style="font-size:11px;font-weight:600;margin-top:4px">Saniye</div></div>
-          </div>
-          <div class="hint">Bu mesaj yalnızca sayaç sıfırlandığında otomatik olarak açılacak. Manuel açma yoktur.</div>
-
-          <!-- locked message content (hidden until timer ends) -->
-          <div id="lockedMessage" class="reveal" style="width:100%;text-align:left;padding-top:10px;display:none;">
-            <div style="font-weight:800;color:var(--accent-2);font-size:16px;margin-bottom:8px">Yeni Yıl Mesajı</div>
-            <div style="background:linear-gradient(180deg,#fff,#fff);padding:12px;border-radius:10px;border:1px solid rgba(160,63,102,0.06);">
-              <p style="margin:0;color:#4b3940;line-height:1.5;">
-                Sevgilim, yeni yıl bize yeni anılar, yeni umutlar ve birlikte daha çok gülme fırsatı getirsin. Her günün bir öncekinden daha özel olsun. Seni her zamankinden daha çok seviyorum.
-              </p>
+            <div style="margin-top:8px; white-space:pre-wrap">
+Sevgilim, yeni yılın bize daha fazla gülümseme, daha uzun sabah sohbetleri, daha sık sarılmalar getirsin. Her yeni gününde yanında olmak, her anını paylaşmak istiyorum. Seni çok seviyorum.
             </div>
           </div>
         </div>
-
-        <footer>
-          <div id="credits">Oluşturuldu: <strong>İbrahim &amp; Sümeyye</strong> · Tasarım: <span class="metatext">Minimal &amp; Romantik</span></div>
-          <div style="margin-top:8px" class="metatext">Not: Müzik tarayıcı politikaları nedeniyle otomatik çalmayı kısıtlayabilir.</div>
-        </footer>
-      </aside>
+      </section>
     </div>
+
+    <!-- RIGHT / SIDE -->
+    <aside class="side" aria-hidden="false">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center">
+          <div>
+            <div style="font-weight:800; color:var(--accent-2)">Anılar</div>
+            <div class="small" style="margin-top:6px">Fotoğrafları görüntüle, şarkıyı kontrol et, ve sayacı izle.</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:12px;color:var(--muted)">Tema</div>
+            <div style="height:8px"></div>
+            <div style="display:flex; gap:8px">
+              <button class="ghost" id="themeToggle">Pembe</button>
+              <button class="ghost" id="contrastToggle">Kontrast</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+        <div class="controls">
+          <button class="btn" id="prevSlide">Önceki</button>
+          <button class="btn" id="nextSlide">Sonraki</button>
+          <button class="btn" id="pauseBtn">Duraklat</button>
+          <button class="btn primary" id="playBtn">Oynat</button>
+        </div>
+
+        <div style="height:14px"></div>
+        <div style="display:flex; gap:8px; align-items:center; justify-content:space-between">
+          <div class="small">Müzik</div>
+          <div style="display:flex; gap:8px; align-items:center">
+            <input type="range" id="volume" min="0" max="1" step="0.01" value="0.9" style="width:120px">
+            <button class="btn" id="muteBtn">🔊</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card center" style="padding:18px; flex-direction:column">
+        <div style="font-weight:700; color:var(--accent-2)">Hediyeler & Notlar</div>
+        <p class="small" style="margin-top:8px">Buraya küçük sürprizler, linkler veya özel notlar koyabilirsin.</p>
+        <div style="height:10px"></div>
+        <button class="btn primary" id="surpriseBtn">Sürpriz Not Göster (Demo)</button>
+      </div>
+
+      <div class="card center small muted-note">
+        <div>Daha fazla kişiselleştirme istersen HTML içinde görsel metinlerini, mesajı veya sayacı değiştirebilirsin.</div>
+      </div>
+
+      <div style="height:6px"></div>
+      <div style="padding:12px;text-align:center" class="small muted-note">Tasarım notu: Otomatik oynatma bazı tarayıcılarda engellenebilir — play butonuyla başlatılabilir.</div>
+    </aside>
+
   </main>
+
+  <footer style="padding:12px 22px; border-top:1px solid rgba(200,200,200,0.06); display:flex; justify-content:space-between; align-items:center; gap:12px">
+    <div class="small muted-note">© Özel Yıldönümü — İbrahim & Sümeyye</div>
+    <div style="display:flex; gap:10px; align-items:center">
+      <button class="btn" id="backTop">Başa Dön</button>
+      <div class="small muted-note">Tek dosya — index.html</div>
+    </div>
+  </footer>
 </div>
 
-<!-- YouTube iframe for autoplay music (hidden) -->
-<div style="display:none" aria-hidden="true">
-  <!-- YouTube embed: autoplay=1, controls=0, loop=1, rel=0 -->
-  <iframe id="ytplayer" width="560" height="315"
-    src="https://www.youtube.com/embed/PY-jid_6RT0?autoplay=1&controls=0&loop=1&rel=0&modestbranding=1&enablejsapi=1&playlist=PY-jid_6RT0"
-    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<!-- Hidden YouTube iframe for audio control -->
+<div id="ytPlayerHolder" style="display:none">
+  <iframe id="ytplayer" width="0" height="0" frameborder="0"
+    src="https://www.youtube.com/embed/PY-jid_6RT0?autoplay=1&mute=0&controls=0&loop=1&playlist=PY-jid_6RT0&enablejsapi=1"
+    allow="autoplay; encrypted-media"></iframe>
 </div>
 
 <script>
-/* -------------------------
-  CONFIG
-   - Image IDs extracted from provided Drive links
-   - Countdown target: Yeni yıl (1 Jan 2026 00:00 Istanbul time)
-   - No manual reveal of locked message
+/*
+  Tek dosya: index.html
+  Açıklama: Slideshow, galeri, sayaç (yılbaşı için), mesajlar, YouTube autoplay denemesi.
 */
-const driveImageIds = [
-  '11tXmRJvtx2FxSevyQXuDKftfcSVSggqw',
-  '1TvmZMnT1-v9SttRzkyhkOtXBxf76p-x_',
-  '19hC698IDeoGYc5MTgUnN1eeiWBi2WybA',
-  '1kE9zDph1hKyD5THt_-Vd7sEaa7tpEwqA'
+
+/* ---------------------------
+   Kullanıcı tarafından sağlanan görseller (Google Drive dosya id'si -> uc link)
+   Dosya ID'leri: (kullanıcının verdiği linklerden çıkarıldı)
+----------------------------*/
+const imageIds = [
+  "11tXmRJvtx2FxSevyQXuDKftfcSVSggqw",
+  "1TvmZMnT1-v9SttRzkyhkOtXBxf76p-x_",
+  "19hC698IDeoGYc5MTgUnN1eeiWBi2WybA",
+  "1kE9zDph1hKyD5THt_-Vd7sEaa7tpEwqA"
 ];
 
-// Helper to get direct view link for Google Drive previewable images
-function driveViewUrl(id){
+function driveView(id){
   return `https://drive.google.com/uc?export=view&id=${id}`;
 }
 
-/* ----- Build Gallery ----- */
-const slidesEl = document.getElementById('slides');
-const thumbsEl = document.getElementById('thumbs');
+/* ---------------------------
+   Slideshow ve gallery kurulum
+----------------------------*/
+const slidesContainer = document.getElementById('slides');
+const indicators = document.getElementById('indicators');
+const galleryGrid = document.getElementById('galleryGrid');
 
+imageIds.forEach((id, i) => {
+  // slide
+  const s = document.createElement('div');
+  s.className = 'slide';
+  const img = document.createElement('img');
+  img.src = driveView(id);
+  img.alt = `Fotoğraf ${i+1}`;
+  s.appendChild(img);
+  slidesContainer.appendChild(s);
+
+  // indicator
+  const d = document.createElement('div');
+  d.className = 'dot' + (i===0 ? ' active' : '');
+  d.setAttribute('data-index', i);
+  d.title = `Fotoğraf ${i+1}`;
+  d.addEventListener('click', ()=> goToSlide(i));
+  indicators.appendChild(d);
+
+  // gallery
+  const g = document.createElement('div');
+  g.className = 'gimg';
+  const gimg = document.createElement('img');
+  gimg.src = driveView(id);
+  gimg.alt = `Fotoğraf ${i+1}`;
+  g.appendChild(gimg);
+  g.addEventListener('click', ()=> openLightbox(i));
+  galleryGrid.appendChild(g);
+});
+
+/* slideshow kontrol */
 let current = 0;
-const slides = [];
+let slideCount = imageIds.length;
+let slideInterval = null;
+let autoPlay = true;
 
-function createSlides(){
-  driveImageIds.forEach((id, idx) => {
-    const url = driveViewUrl(id);
-    const slide = document.createElement('div');
-    slide.className = 'slide';
-    slide.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.06), rgba(255,240,245,0.02)), url("${url}")`;
-    slide.setAttribute('role','img');
-    slide.setAttribute('aria-label', `Fotoğraf ${idx+1}`);
-    if(idx === 0) slide.classList.add('show');
-    slidesEl.appendChild(slide);
-    slides.push(slide);
-
-    // thumb
-    const t = document.createElement('div');
-    t.className = 'thumb' + (idx===0? ' active':'');
-    t.innerHTML = `<img src="${url}" alt="thumb-${idx+1}">`;
-    t.addEventListener('click', ()=>{ goTo(idx); });
-    thumbsEl.appendChild(t);
+function updateSlides(){
+  slidesContainer.style.transform = `translateX(-${current * 100}%)`;
+  document.querySelectorAll('.dot').forEach((el, idx)=>{
+    el.classList.toggle('active', idx===current);
   });
 }
-createSlides();
 
-function goTo(idx){
-  if(idx===current) return;
-  slides[current].classList.remove('show');
-  thumbsEl.children[current].classList.remove('active');
-  current = idx;
-  slides[current].classList.add('show');
-  thumbsEl.children[current].classList.add('active');
+function nextSlide(){
+  current = (current + 1) % slideCount;
+  updateSlides();
+}
+function prevSlide(){
+  current = (current - 1 + slideCount) % slideCount;
+  updateSlides();
+}
+function goToSlide(i){
+  current = i % slideCount;
+  updateSlides();
+}
+function startSlideshow(){
+  if(slideInterval) clearInterval(slideInterval);
+  slideInterval = setInterval(()=> {
+    if(autoPlay) nextSlide();
+  }, 5000);
+}
+function stopSlideshow(){ if(slideInterval) clearInterval(slideInterval); slideInterval=null; }
+
+/* bağla butonlar */
+document.getElementById('nextSlide').addEventListener('click', ()=>{ nextSlide(); stopSlideshow(); autoPlay=false;});
+document.getElementById('prevSlide').addEventListener('click', ()=>{ prevSlide(); stopSlideshow(); autoPlay=false;});
+document.getElementById('pauseBtn').addEventListener('click', ()=>{ autoPlay=false; stopSlideshow(); });
+document.getElementById('playBtn').addEventListener('click', ()=>{ autoPlay=true; startSlideshow(); });
+
+startSlideshow();
+
+/* basit lightbox (tam ekran büyütme) */
+function openLightbox(index){
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.88); display:flex; align-items:center; justify-content:center; z-index:9999;';
+  const img = document.createElement('img');
+  img.src = driveView(imageIds[index]);
+  img.style.maxWidth='92%'; img.style.maxHeight='92%'; img.style.borderRadius='12px'; img.style.boxShadow='0 18px 60px rgba(0,0,0,0.6)';
+  overlay.appendChild(img);
+  overlay.addEventListener('click', ()=> document.body.removeChild(overlay));
+  document.body.appendChild(overlay);
 }
 
-/* autoplay slideshow */
-let slideTimer = setInterval(()=>{
-  let next = (current+1) % slides.length;
-  goTo(next);
-}, 5200);
+/* ---------------------------
+   Navigation (single-page style)
+----------------------------*/
+const pages = document.querySelectorAll('section.page');
+function showPage(id){
+  pages.forEach(p=>{
+    if(p.id === id){
+      p.classList.add('active');
+      p.removeAttribute('aria-hidden');
+    } else {
+      p.classList.remove('active');
+      p.setAttribute('aria-hidden','true');
+    }
+  });
+  // small UI tweaks: scroll to top of site container
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('nav .btn').forEach(btn=>{
+  btn.addEventListener('click', ()=> {
+    const target = btn.getAttribute('data-nav');
+    if(target) showPage(target);
+  });
+});
+document.getElementById('yilBtn').addEventListener('click', ()=> showPage('yil'));
+document.getElementById('backTop').addEventListener('click', ()=> showPage('home'));
 
-/* Pause autoplay on touch/hover to let user explore */
-slidesEl.addEventListener('mouseenter', ()=> clearInterval(slideTimer));
-slidesEl.addEventListener('mouseleave', ()=> slideTimer = setInterval(()=>{
-  let next = (current+1) % slides.length;
-  goTo(next);
-}, 5200));
+/* ---------------------------
+   Fullscreen button
+----------------------------*/
+document.getElementById('fullscreenBtn').addEventListener('click', async ()=>{
+  try{
+    if(!document.fullscreenElement){
+      await document.documentElement.requestFullscreen();
+    } else {
+      await document.exitFullscreen();
+    }
+  }catch(e){ console.warn(e) }
+});
 
-/* -------------------------
-  Countdown logic
-  Target: 2026-01-01 00:00:00 Europe/Istanbul
-  We'll compute using user's local timezone; for maximum clarity we set exact date/time.
---------------------------*/
+/* ---------------------------
+   Theme toggles (simple)
+----------------------------*/
+document.getElementById('themeToggle').addEventListener('click', ()=> {
+  // small accent swap
+  const root = document.documentElement;
+  if(root.style.getPropertyValue('--accent') === 'black'){
+    root.style.setProperty('--accent', '#c86b86');
+    root.style.setProperty('--accent-2', '#b44f6a');
+    root.style.removeProperty('--card');
+  } else {
+    root.style.setProperty('--accent', 'black');
+    root.style.setProperty('--accent-2', '#444');
+    root.style.setProperty('--card', '#fffef2');
+  }
+});
 
-// Construct the target Date time in local timezone corresponding to 2026-01-01 00:00:00
-// IMPORTANT: create with ISO and treat as local by omitting 'Z'.
-const targetYear = (new Date()).getFullYear() >= 2026 ? 2027 : 2026; // if already past 2026, adjust (defensive)
-const targetString = `${targetYear}-01-01T00:00:00`; // local time
-const targetDate = new Date(targetString);
+/* ---------------------------
+   Surprise button (demo)
+----------------------------*/
+document.getElementById('surpriseBtn').addEventListener('click', ()=>{
+  alert('Sürpriz not: Seni çok seviyorum! — Bu alanı dilediğin gibi kişiselleştirebilirsin.');
+});
 
-const daysEl = document.getElementById('days');
-const hoursEl = document.getElementById('hours');
-const minutesEl = document.getElementById('minutes');
-const secondsEl = document.getElementById('seconds');
-const lockedArea = document.getElementById('lockedArea');
-const lockedMessage = document.getElementById('lockedMessage');
+/* ---------------------------
+   Yılbaşı sayaçı
+   - Sayaç bir sonraki 1 Ocak 00:00:00 hedefli.
+   - Sayaç sıfırlanınca yearMessage gösterilir.
+   - Yalnızca sayaç sıfırlandığında açılır; başka yol yok.
+----------------------------*/
 const countdownEl = document.getElementById('countdown');
+const yearMessageEl = document.getElementById('yearMessage');
+
+// hedef: bir sonraki 1 Ocak saat 00:00:00 (kullanıcının lokal zamanına göre)
+function nextNewYear(){
+  const now = new Date();
+  let year = now.getFullYear();
+  const candidate = new Date(year, 0, 1, 0, 0, 0, 0); // 1 Jan current year
+  if(candidate <= now) year = year + 1;
+  return new Date(year, 0, 1, 0, 0, 0, 0);
+}
+
+let target = nextNewYear();
 
 function updateCountdown(){
   const now = new Date();
-  let diff = Math.max(0, targetDate - now);
-  // Calculate
-  const s = Math.floor(diff / 1000);
-  const days = Math.floor(s / (3600*24));
-  const hours = Math.floor((s % (3600*24)) / 3600);
-  const minutes = Math.floor((s % 3600) / 60);
-  const seconds = Math.floor(s % 60);
-
-  daysEl.textContent = String(days).padStart(2,'0');
-  hoursEl.textContent = String(hours).padStart(2,'0');
-  minutesEl.textContent = String(minutes).padStart(2,'0');
-  secondsEl.textContent = String(seconds).padStart(2,'0');
-
+  const diff = target - now;
   if(diff <= 0){
-    // Reveal locked message automatically and disable the countdown visual
-    revealLockedMessage();
-    clearInterval(countInterval);
+    // açılma anı
+    countdownEl.textContent = '00 gün 00:00:00';
+    revealYearMessage();
+    clearInterval(countdownTimer);
+    return;
   }
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((diff % (1000*60)) / 1000);
+  countdownEl.textContent = `${String(days).padStart(2,'0')} gün ${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
 }
 
-// Start updating immediately
+function revealYearMessage(){
+  // kesinlikle yalnızca bu fonksiyon sayaç bittiğinde çağrılacak
+  yearMessageEl.style.display = 'block';
+  yearMessageEl.setAttribute('aria-hidden','false');
+  // küçük animasyon
+  yearMessageEl.animate([{opacity:0, transform:'translateY(6px)'},{opacity:1, transform:'translateY(0)'}], {duration:420, easing:'ease-out'});
+}
+
+/* Başlat */
 updateCountdown();
-const countInterval = setInterval(updateCountdown, 1000);
+const countdownTimer = setInterval(updateCountdown, 1000);
 
-/* MAKE SURE USER CANNOT OPEN MESSAGE MANUALLY
-   - hide reveal content until timer hits zero
-   - remove any pointer events or controls to open
+/* ---------------------------
+   YouTube autoplay handling
+   - iframe embed kullanılıyor.
+   - Tarayıcı otomatik çalma engellerse fallback göster.
+----------------------------*/
+const ytIframe = document.getElementById('ytplayer');
+const audioOverlay = document.getElementById('audioOverlay');
+const playFallbackBtn = document.getElementById('playFallback');
+const playBtn = document.getElementById('playBtn');
+const pauseBtn = document.getElementById('pauseBtn');
+const muteBtn = document.getElementById('muteBtn');
+const volumeSlider = document.getElementById('volume');
+
+let isMuted = false;
+let isPlaying = false;
+
+/* YouTube iframe API ile kontrol — basit postMessage API'si kullanıyoruz */
+function postYt(cmd, args=[]){
+  const message = JSON.stringify({ event: 'command', func: cmd, args: args });
+  try { ytIframe.contentWindow.postMessage(message, '*'); }
+  catch(e){ /* ignore */ }
+}
+
+// Deneme: autoplay başlatmayı dene
+function attemptAutoplay(){
+  // autoplay=1 parametresi ile ekledik; yine de tarayıcı durdurabilir.
+  // Fallback: birkaç saniye bekle, eğer video oynuyorsa overlay'i gizle; yoksa overlay göster.
+  // Not: bu test yanıtı alamayabilir, o yüzden overlay'i gösterme kararı zaman aşımına göre.
+  setTimeout(()=>{
+    // Çoğu tarayıcı autoplay engeller => overlay göster
+    audioOverlay.style.display = 'flex';
+  }, 900);
+}
+attemptAutoplay();
+
+/* Play fallback (kullanıcı etkileşimiyle başlat) */
+playFallbackBtn.addEventListener('click', ()=> {
+  audioOverlay.style.display = 'none';
+  // Kullanıcı etkileşimiyle oynat komutu
+  postYt('playVideo');
+  isPlaying = true;
+});
+
+/* Play / Pause butonları */
+playBtn.addEventListener('click', ()=>{
+  postYt('playVideo');
+  isPlaying = true;
+});
+pauseBtn.addEventListener('click', ()=>{
+  postYt('pauseVideo');
+  isPlaying = false;
+});
+muteBtn.addEventListener('click', ()=>{
+  if(!isMuted){
+    postYt('mute');
+    isMuted = true;
+    muteBtn.textContent = '🔈';
+  } else {
+    postYt('unMute');
+    isMuted = false;
+    muteBtn.textContent = '🔊';
+  }
+});
+
+/* Volume slider - YouTube iframe API doesn't accept volume via postMessage in all contexts,
+   but we can attempt:
 */
-function revealLockedMessage(){
-  // ensure it's only revealed by timer
-  lockedMessage.style.display = 'block';
-  // animate and remove lock UI
-  const lockIcon = lockedArea.querySelector('.lock');
-  if(lockIcon) lockIcon.style.opacity = '0';
-  // hide countdown after short fade
-  countdownEl.style.display = 'none';
-  const hints = lockedArea.querySelector('.hint');
-  if(hints) hints.style.display = 'none';
-  // Expand reveal area
-  lockedArea.style.minHeight = 'auto';
-}
-
-/* -------------------------
-  YouTube autoplay handling + mute toggle
-  - Some browsers block autoplay with sound.
-  - We'll attempt to play using the iframe API (postMessage) and provide a mute toggle.
---------------------------*/
-const ytFrame = document.getElementById('ytplayer');
-const muteToggle = document.getElementById('muteToggle');
-let isMuted = false; // track state
-
-// We'll attempt to send play command via postMessage using YouTube IFrame API commands
-function postMessageToYt(command, args){
-  if(!ytFrame || !ytFrame.contentWindow) return;
-  ytFrame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: command, args: args || [] }), '*');
-}
-
-// On load, try to play (some browsers will block)
-function tryPlayYT(){
-  // Play (attempt)
-  postMessageToYt('playVideo');
-  // Try unmute (some browsers require user gesture; we allow user to toggle)
-  if(!isMuted) postMessageToYt('unMute');
-}
-tryPlayYT();
-
-// Mute toggle button behavior: toggles mute/unmute
-muteToggle.addEventListener('click', ()=>{
-  isMuted = !isMuted;
-  if(isMuted){
-    postMessageToYt('mute');
-    muteToggle.textContent = '🔇 Müzik';
-  } else {
-    postMessageToYt('unMute');
-    muteToggle.textContent = '🔊 Müzik';
-  }
+volumeSlider.addEventListener('input', (e)=>{
+  const v = Math.round(Number(e.target.value) * 100);
+  postYt('setVolume', [v]);
 });
 
-/* Fullscreen */
-const fullscreenBtn = document.getElementById('fullscreenBtn');
-fullscreenBtn.addEventListener('click', ()=>{
-  const el = document.documentElement;
-  if(!document.fullscreenElement){
-    el.requestFullscreen?.();
-  } else {
-    document.exitFullscreen?.();
-  }
+/* Gelişmiş: eğer tarayıcı autoplay yaparsa overlayi gizle */
+window.addEventListener('message', (ev)=>{
+  // YouTube API mesajları burada işlenebilir; ama güvenlik için string olarak kontrol ediyoruz.
+  try{
+    const d = typeof ev.data === 'string' ? JSON.parse(ev.data) : ev.data;
+    // Eğer video oynatma durumu bildirimi geldiyse overlayi gizleyebiliriz.
+    if(d && d.event === 'onStateChange' && d.info === 1){
+      // state 1 -> playing
+      audioOverlay.style.display = 'none';
+      isPlaying = true;
+    }
+  }catch(e){}
 });
 
-/* Accessibility: keyboard shortcuts */
+/* ---------------------------
+   Sayfada erişilebilirlik / keyboard kısa yollar
+----------------------------*/
 document.addEventListener('keydown', (e)=>{
-  if(e.key === 'm' || e.key === 'M') {
-    muteToggle.click();
-  } else if(e.key === 'f' || e.key === 'F'){
-    fullscreenBtn.click();
-  }
+  if(e.key === 'ArrowRight') nextSlide();
+  if(e.key === 'ArrowLeft') prevSlide();
+  if(e.key === ' ') { e.preventDefault(); if(isPlaying){ postYt('pauseVideo'); isPlaying=false;} else { postYt('playVideo'); isPlaying=true; } }
 });
 
-/* Defensive: prevent manual reveal attempts by removing context menu on locked area */
-lockedArea.addEventListener('contextmenu', (e)=> e.preventDefault());
+/* ---------------------------
+   Güvenli mesaj verileri (istek üzerine değiştirilebilir)
+----------------------------*/
+/* Kullanıcı mesajı zaten HTML içinde yer alıyor (loveMessage). Yılbaşı mesajı ise JS ile eklendi yukarıda. */
 
-/* Extra polish: reveal small animation when first message is read */
-const firstMessage = document.getElementById('firstMessage');
-firstMessage.addEventListener('click', ()=> {
-  firstMessage.style.transform = 'translateY(-3px)';
-  setTimeout(()=> firstMessage.style.transform = '', 300);
+/* ---------------------------
+   Erişilebilirlik iyileştirmeleri
+----------------------------*/
+document.querySelectorAll('.btn').forEach(b=>{
+  b.addEventListener('keyup', (e)=> { if(e.key === 'Enter') b.click(); });
 });
 
-/* Prevent selecting locked message content until revealed */
-lockedMessage.style.userSelect = 'none';
-function enableLockedSelection(){
-  lockedMessage.style.userSelect = 'text';
-}
+/* ---------------------------
+   Başlangıç: ana sayfayı yükle
+----------------------------*/
+showPage('home');
 
-/* When reveal happens, enable selection */
-const observer = new MutationObserver(()=> {
-  if(lockedMessage.style.display !== 'none'){
-    enableLockedSelection();
-  }
-});
-observer.observe(lockedMessage, { attributes: true, childList: true, subtree: true });
-
-/* Small progressive enhancement: if autoplay blocked, show a hint */
-let autoplayAllowed = true;
-setTimeout(()=>{
-  // If iframe hasn't started and countdown area still shows (some heuristic), show hint
-  // (we won't add UI to break the "no manual open" rule for locked message)
-  // Instead, update footer text
-  const credits = document.getElementById('credits');
-  credits.innerHTML += ' · <span class="metatext">Eğer müzik otomatik başlamazsa tarayıcı ses kısıtlaması aktif olabilir.</span>';
-}, 2500);
-
-/* Safety: ensure image loading fallback */
-slides.forEach((s, idx)=>{
-  const url = driveViewUrl(driveImageIds[idx]);
-  const img = new Image();
-  img.onload = ()=>{/* ok */};
-  img.onerror = ()=>{
-    s.style.background = 'linear-gradient(180deg,#fff,#fff)';
-    s.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#8b6b72;font-weight:700">Görsel yüklenemedi</div>`;
-  };
-  img.src = url;
-});
-
-/* End of script */
 </script>
 </body>
 </html>
