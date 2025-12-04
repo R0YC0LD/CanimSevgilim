@@ -1,226 +1,537 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<title>İbrahim & Sümeyye – Özel Anılar</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>İbrahim ♥ Sümeyye — Yıldönümü</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
 <style>
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        background: #ffe6f2;
-        color: #444;
-    }
+  :root{
+    --bg:#0f0e13;
+    --card:#15121a;
+    --accent:#b76b88; /* koyu pembe tonu */
+    --accent-2:#8f4b66;
+    --muted:#bdb7bf;
+    --glass: rgba(255,255,255,0.04);
+    --soft: rgba(255,255,255,0.03);
+  }
 
-    header {
-        text-align: center;
-        padding: 40px 20px;
-        background: linear-gradient(135deg, #ffb6d9, #ffd9ea);
-        color: #fff;
-        position: relative;
-        overflow: hidden;
-    }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Montserrat, system-ui, sans-serif;
+    background:
+      radial-gradient(1200px 600px at 10% 10%, rgba(143,75,102,0.12), transparent 8%),
+      radial-gradient(900px 400px at 90% 90%, rgba(183,107,136,0.08), transparent 8%),
+      var(--bg);
+    color:#fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+  }
 
-    header h1 {
-        font-size: 32px;
-        margin-bottom: 10px;
-    }
+  .wrap{
+    width:100%;
+    max-width:1100px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    overflow:hidden;
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    gap:28px;
+    padding:28px;
+    align-items:start;
+  }
 
-    /* Parçacık animasyonu */
-    .confetti {
-        position: fixed;
-        top: -10px;
-        width: 10px;
-        height: 10px;
-        background: #ff84c2;
-        opacity: 0.8;
-        border-radius: 50%;
-        animation: fall 3s linear infinite;
-    }
+  /* left - gallery + messages */
+  .left{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
 
-    @keyframes fall {
-        0% { transform: translateY(-20px) rotate(0); }
-        100% { transform: translateY(110vh) rotate(360deg); }
-    }
+  .title{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .logo{
+    width:68px;height:68px;border-radius:12px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:grid;place-items:center;font-weight:900;font-size:24px;color:#fff;
+    box-shadow: 0 6px 18px rgba(143,75,102,0.28);
+  }
+  h1{margin:0;font-size:20px;letter-spacing:0.2px}
+  p.lead{margin:0;color:var(--muted);font-size:13px}
 
-    .section {
-        background: #fff;
-        margin: 20px auto;
-        width: min(900px, 95%);
-        padding: 25px;
-        border-radius: 16px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
+  .gallery{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap:12px;
+  }
+  .photo{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    background:var(--soft);
+    border:1px solid rgba(255,255,255,0.03);
+    min-height:180px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transform-origin:center;
+    transition:transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .3s;
+  }
+  .photo img{width:100%;height:100%;object-fit:cover;display:block}
 
-    .photo-box {
-        width: 100%;
-        height: 270px;
-        border-radius: 14px;
-        background: #ffd9ea;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #b46378;
-        font-size: 18px;
-        margin-bottom: 15px;
-        position: relative;
-        overflow: hidden;
-    }
+  .photo:hover{transform:scale(1.02);box-shadow:0 10px 40px rgba(0,0,0,0.6)}
 
-    .photo-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 14px;
-    }
+  /* message box under first image */
+  .msg-box{
+    grid-column: 1 / -1;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:12px;
+    padding:16px;
+    border:1px solid rgba(255,255,255,0.03);
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+  .msg-avatar{
+    width:56px;height:56px;border-radius:10px;overflow:hidden;flex:0 0 56px;
+    border:1px solid rgba(255,255,255,0.03);
+  }
+  .msg-content h3{margin:0;font-size:15px}
+  .msg-content p{margin:6px 0 0;color:var(--muted);font-size:14px;line-height:1.4}
 
-    .upload-btn {
-        margin-top: 10px;
-        background: #ff9bcf;
-        border: none;
-        padding: 10px 16px;
-        border-radius: 10px;
-        cursor: pointer;
-        color: #fff;
-        font-weight: bold;
-    }
+  /* right column - lock + countdown + controls */
+  .right{
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);
+    display:flex;flex-direction:column;gap:14px;align-items:stretch;
+    min-height:320px;
+  }
 
-    .upload-btn:hover {
-        background: #ff7fbe;
-    }
+  .countdown{
+    background:linear-gradient(90deg, rgba(183,107,136,0.08), rgba(143,75,102,0.06));
+    border-radius:12px;padding:12px;display:flex;gap:8px;justify-content:space-between;align-items:center;
+  }
+  .countdown .time{
+    display:flex;gap:10px;
+  }
+  .time .unit{
+    text-align:center;padding:8px 12px;background:rgba(0,0,0,0.25);border-radius:8px;min-width:64px;
+  }
+  .unit .num{font-weight:700;font-size:18px}
+  .unit .label{font-size:11px;color:var(--muted);margin-top:4px}
 
-    .year-message {
-        text-align: center;
-        padding: 20px;
-        background: #fff4fc;
-        border: 1px dashed #ff94c2;
-        border-radius: 12px;
-        margin-top: 20px;
-    }
+  .lock-area{
+    margin-top:6px;padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.06));
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:160px;
+    position:relative;
+  }
+  .lock-icon{
+    width:72px;height:72px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent-2),var(--accent));
+    font-size:32px;font-weight:800;color:#fff;box-shadow:0 8px 28px rgba(143,75,102,0.26);
+  }
+  .locked-text{color:var(--muted);text-align:center;padding:0 6px}
+  .reveal-msg{
+    display:none;
+    width:100%;
+    padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);
+    color:#fff;line-height:1.5;transform-origin:top;animation:pop .8s cubic-bezier(.2,.9,.2,1);
+  }
+  @keyframes pop{
+    from{opacity:0;transform:translateY(12px) scale(.98)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
 
-    .hidden { display: none; }
+  .controls{display:flex;gap:10px;align-items:center;justify-content:space-between}
+  .btn{
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    border:none;color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;
+    box-shadow:0 6px 18px rgba(143,75,102,0.18);
+  }
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;font-weight:600}
 
-    #countdown {
-        font-size: 24px;
-        font-weight: bold;
-        color: #d14e7b;
-        margin-top: 15px;
-    }
+  .small{font-size:13px;color:var(--muted)}
 
-    iframe.spotify {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        opacity: 0;
-        pointer-events: none;
-    }
+  /* audio playback helper */
+  .play-overlay{
+    position:fixed;left:18px;bottom:18px;z-index:60;
+    display:flex;gap:12px;align-items:center;
+  }
+  .play-btn{
+    width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--accent-2),var(--accent));
+    display:grid;place-items:center;font-weight:800;color:#fff;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.6);
+  }
+  .play-status{color:var(--muted);font-size:13px}
+
+  /* responsive */
+  @media (max-width:980px){
+    .wrap{grid-template-columns:1fr; padding:18px}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:520px){
+    .gallery{grid-template-columns:1fr}
+    .title{gap:10px}
+    .logo{width:56px;height:56px;font-size:20px}
+  }
+
 </style>
 </head>
-
 <body>
+  <div class="wrap" role="main" aria-labelledby="page-title">
+    <div class="left">
+      <div class="title">
+        <div class="logo">İ❤S</div>
+        <div>
+          <h1 id="page-title">İbrahim &amp; Sümeyye — Birlikte Daha Güçlü</h1>
+          <p class="lead">17. ayınız kutlu olsun — özel anılarınız burada.</p>
+        </div>
+      </div>
 
-<!-- Otomatik şarkı -->
-<button id="playMusic" class="upload-btn" style="margin:20px auto;display:block;width:200px;">🎵 Şarkıyı Oynat</button>
-<iframe id="ytPlayer" class="spotify" src="https://www.youtube.com/embed/PY-jid_6RT0?enablejsapi=1" allow="autoplay"></iframe>
+      <div class="gallery" id="gallery">
+        <!-- Photos: drive uc links constructed from shared urls -->
+        <div class="photo">
+          <img id="img1" src="https://drive.google.com/uc?export=view&id=11tXmRJvtx2FxSevyQXuDKftfcSVSggqw" alt="Fotoğraf 1 - İbrahim ve Sümeyye">
+        </div>
+        <div class="photo">
+          <img id="img2" src="https://drive.google.com/uc?export=view&id=1TvmZMnT1-v9SttRzkyhkOtXBxf76p-x_" alt="Fotoğraf 2 - İbrahim ve Sümeyye">
+        </div>
+        <div class="photo">
+          <img id="img3" src="https://drive.google.com/uc?export=view&id=19hC698IDeoGYc5MTgUnN1eeiWBi2WybA" alt="Fotoğraf 3 - İbrahim ve Sümeyye">
+        </div>
+        <div class="photo">
+          <img id="img4" src="https://drive.google.com/uc?export=view&id=1kE9zDph1hKyD5THt_-Vd7sEaa7tpEwqA" alt="Fotoğraf 4 - İbrahim ve Sümeyye">
+        </div>
 
-<header>
-    <h1>💗 İbrahim & Sümeyye 💗</h1>
-    <p>Sevgi defterinizin dijital hali</p>
-</header>
+        <!-- message under first image -->
+        <div class="msg-box" aria-live="polite">
+          <div class="msg-avatar">
+            <img src="https://drive.google.com/uc?export=view&id=11tXmRJvtx2FxSevyQXuDKftfcSVSggqw" alt="Avatar" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+          <div class="msg-content">
+            <h3>İbrahim'den Sümeyye'ye</h3>
+            <p>Her sabah seninle uyanmak, seninle gülmek ve seninle büyümek — her şeyin daha anlamlı olduğu 17 ay ve çok daha fazlası. Seni seviyorum, hep birlikte nice yıllara.</p>
+          </div>
+        </div>
+      </div>
 
-<div class="section">
-    <h2>📸 En Sevdiğim Fotoğraf</h2>
-    <div class="photo-box" id="mainPhoto"><img src="https://drive.google.com/uc?id=11tXmRJvtx2FxSevyQXuDKftfcSVSggqw" /></div>
-    
+    </div>
 
-    <textarea style="width:100%;height:120px;border-radius:12px;padding:12px;border:1px solid #ffb6d9;">
-Buraya fotoğrafın altına özel not / şiir / anı yazılabilir...
-    </textarea>
-</div>
+    <aside class="right" aria-label="Yılbaşı mesajı ve kontrol paneli">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <strong>Gizli Yılbaşı Mesajı</strong>
+          <div class="small">Sayaç sıfırlandığında mesaj otomatik açılacak.</div>
+        </div>
+        <div style="text-align:right">
+          <div class="small">Tarih hedefi:</div>
+          <div style="font-weight:700" id="target-date">—</div>
+        </div>
+      </div>
 
-<div class="section">
-    <h2>📸 Ek Fotoğraflar</h2>
+      <div class="countdown" aria-live="polite">
+        <div class="time" id="timeboxes">
+          <div class="unit"><div class="num" id="days">--</div><div class="label">Gün</div></div>
+          <div class="unit"><div class="num" id="hours">--</div><div class="label">Saat</div></div>
+          <div class="unit"><div class="num" id="minutes">--</div><div class="label">Dakika</div></div>
+          <div class="unit"><div class="num" id="seconds">--</div><div class="label">Saniye</div></div>
+        </div>
+        <button class="btn ghost" id="resetButton" title="Sayaç sıfırlanmışsa zorla aç">Aç (zorla)</button>
+      </div>
 
-    <div class="photo-box" id="p1"><img src="https://drive.google.com/uc?id=1TvmZMnT1-v9SttRzkyhkOtXBxf76p-x_" /></div>
-    
+      <div class="lock-area" id="lockArea" role="region" aria-labelledby="locked-heading">
+        <div class="lock-icon">🔒</div>
+        <div id="locked-heading" class="locked-text">
+          Yılbaşına kadar bu mesaj kilitli. Sabretmeye değer — özel bir sürpriz.
+        </div>
 
-    <div class="photo-box" id="p2"><img src="https://drive.google.com/uc?id=19hC698IDeoGYc5MTgUnN1eeiWBi2WybA" /></div>
-    
+        <div class="reveal-msg" id="revealMsg" aria-hidden="true">
+          <h3 style="margin-top:0;margin-bottom:6px">Sürpriz Mesaj — Mutlu Yıllar!</h3>
+          <p>Yeni yılın ilk anlarında bu mesaj açıldı. İbrahim ve Sümeyye — birbirinize olan bağlılığınız ve sevgiden ilham alıyoruz. Yeni yılınız umut, sağlık ve birlikte daha çok anıyla gelsin.</p>
+        </div>
+      </div>
 
-    <div class="photo-box" id="p3"><img src="https://drive.google.com/uc?id=1kE9zDph1hKyD5THt_-Vd7sEaa7tpEwqA" /></div>
-    
-</div>
+      <div class="controls">
+        <div style="display:flex;flex-direction:column">
+          <div class="small">Müzik</div>
+          <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
+            <button id="muteBtn" class="btn ghost">Sesi Kapat/Aç</button>
+            <button id="loopBtn" class="btn ghost">Döngü: Aç</button>
+          </div>
+        </div>
 
-<div class="section year-message">
-    <h2>🎄 1 Ocak Sürpriz Mesajı</h2>
+        <div style="text-align:right">
+          <div class="small">Paylaş</div>
+          <div style="margin-top:8px">
+            <button class="btn" id="shareBtn">Bağlantıyı Kopyala</button>
+          </div>
+        </div>
+      </div>
 
-    <p id="countdown"></p>
+    </aside>
+  </div>
 
-    <p id="lockedText">
-        Bu mesaj <b>1 Ocak</b> tarihinde açılacaktır. 🎁
-    </p>
+  <!-- small playback overlay (in case autoplay blocked) -->
+  <div class="play-overlay" id="playOverlay" aria-hidden="true" style="display:none">
+    <div class="play-btn" id="playBtn" title="Müziği oynat/durdur">►</div>
+    <div class="play-status" id="playStatus">Oynatılıyor...</div>
+  </div>
 
-    <p id="newYearText" class="hidden">
-Kalbim, Ömrüm, Hayatım, Her şeyim ❤️<br><br>
-Bugün birlikteliğimizin 17.ayı ve ben seninle geçirdiğim her saniye için çok mutluyum. Senin hayatımda olmandan çok mutluyum. Hayatında olmaktan çok mutluyum. Seninle olmaktan çok mutluyum. Dile kolay beraber 519.günümüz ❤️❤️<br><br>
-519 kere maşallah bize. Seninle olmaktan o kadar keyif alıyorum ki bunu inan tahmin bile edemezsin. Sen hayatımın en özel parçasısın ve son nefesime kadar da öyle olucaksın. Yanımda olduğun her saniye için teşekkür ederim güzel sevgilim. Seni çok seviyorum ❤️ 17.ayımız kutlu olsun kahve gözlüm 🤎🤎
-</p>
-</div>
+  <!-- YouTube iframe (hidden) -->
+  <div id="yt-root" style="display:none">
+    <!-- iframe will be injected by API -->
+    <div id="player"></div>
+  </div>
 
 <script>
-    document.getElementById('playMusic').addEventListener('click', function() {
-        const player = document.getElementById('ytPlayer');
-        player.src = "https://www.youtube.com/embed/PY-jid_6RT0?autoplay=1&enablejsapi=1";
-    });
+/*
+  İşleyiş:
+  - Sayaç: sayfanın açıldığı tarihe göre bir sonraki 1 Ocak (yılbaşı) hedeflenir.
+  - Sayaç 0 olduğunda kilit açılır ve mesaj ortaya çıkar.
+  - Zorla açma butonu var.
+  - YouTube video otomatik oynatma denemesi yapılır (tarayıcı kısıtlamasına takılabilir). O takdirde görünen oynat düğmesiyle başlatma sağlanır.
+*/
 
-    /* --- Fotoğraf Yükleme --- */
-            reader.readAsDataURL(file);
-    }
+// ---------- AYARLAR ----------
+const YT_VIDEO_ID = "PY-jid_6RT0"; // kullanıcı verdiği youtube video id
+let loopEnabled = true;
+let muted = false;
 
+// ---------- SAYACI AYARLA ----------
+function getNextNewYear(){
+  const now = new Date();
+  // hedef: bir sonraki 1 Ocak 00:00:00 (yerel zaman)
+  const year = now.getFullYear() + 1;
+  return new Date(year, 0, 1, 0, 0, 0, 0);
+}
 
-    /* --- Yılbaşı Geri Sayım --- */
-    const target = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0);
+const targetDate = getNextNewYear();
+document.getElementById('target-date').textContent = targetDate.toLocaleString('tr-TR', {year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit'});
 
-    function updateCountdown() {
-        const now = new Date();
-        const diff = target - now;
+// sayaç fonksiyonu
+function updateCountdown(){
+  const now = new Date();
+  const diff = targetDate - now;
+  if (diff <= 0){
+    // aç
+    revealLockedMessage();
+    setCountdownValues(0,0,0,0);
+    return;
+  }
+  const sec = Math.floor(diff/1000);
+  const days = Math.floor(sec / (3600*24));
+  const hours = Math.floor((sec % (3600*24)) / 3600);
+  const minutes = Math.floor((sec % 3600) / 60);
+  const seconds = Math.floor(sec % 60);
+  setCountdownValues(days, hours, minutes, seconds);
+}
 
-        if (diff <= 0) {
-            document.getElementById("countdown").classList.add("hidden");
-            document.getElementById("lockedText").classList.add("hidden");
-            document.getElementById("newYearText").classList.remove("hidden");
-            launchConfetti();
-            return;
+function setCountdownValues(d,h,m,s){
+  document.getElementById('days').textContent = String(d).padStart(2,'0');
+  document.getElementById('hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('minutes').textContent = String(m).padStart(2,'0');
+  document.getElementById('seconds').textContent = String(s).padStart(2,'0');
+}
+
+let countdownInterval = setInterval(updateCountdown, 1000);
+updateCountdown(); // hemen çalıştır
+
+// reveal fonksiyonu
+function revealLockedMessage(){
+  const lockArea = document.getElementById('lockArea');
+  const reveal = document.getElementById('revealMsg');
+  if (reveal.getAttribute('data-open') === '1') return;
+  reveal.style.display = 'block';
+  reveal.setAttribute('aria-hidden','false');
+  document.querySelector('.lock-icon').textContent = "🎉";
+  document.getElementById('locked-heading').textContent = "Mutlu Yıllar! Mesaj açıldı.";
+  reveal.setAttribute('data-open','1');
+}
+
+// 'zorla aç' butonu
+document.getElementById('resetButton').addEventListener('click', ()=>{
+  clearInterval(countdownInterval);
+  setCountdownValues(0,0,0,0);
+  revealLockedMessage();
+});
+
+// paylaş butonu
+document.getElementById('shareBtn').addEventListener('click', async()=>{
+  const url = location.href;
+  try{
+    await navigator.clipboard.writeText(url);
+    alert('Site bağlantısı kopyalandı!');
+  }catch(e){
+    prompt('Bağlantıyı kopyalayın:', url);
+  }
+});
+
+// ---------- YouTube API ile oynatma (autoplay denemesi) ----------
+let player;
+function onYouTubeIframeAPIReady(){
+  player = new YT.Player('player', {
+    height: '200',
+    width: '320',
+    videoId: YT_VIDEO_ID,
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+      loop: loopEnabled ? 1 : 0,
+      playlist: YT_VIDEO_ID,
+      modestbranding: 1,
+      rel: 0,
+      playsinline: 1
+    },
+    events: {
+      'onReady': (e)=> {
+        // sessiz başlatma deneyin: e.target.mute() / playVideo()
+        if (muted) e.target.mute();
+        // try to play - browsers might block
+        const p = e.target.playVideo && e.target.playVideo();
+        if (p && typeof p.then === 'function'){
+          p.then(()=> {
+            // oyun başladı
+            showPlayOverlay(true);
+          }).catch(()=> {
+            // otomatik oynatma engellendi -> göster play overlay
+            showPlayOverlay(false);
+          });
+        } else {
+          // legacy play
+          try{ e.target.playVideo(); showPlayOverlay(true); }catch(err){ showPlayOverlay(false); }
         }
-
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const m = Math.floor((diff / (1000 * 60)) % 60);
-        const s = Math.floor((diff / 1000) % 60);
-
-        document.getElementById("countdown").innerHTML =
-            `Kalan Süre: ${d} gün ${h} saat ${m} dakika ${s} saniye`;
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-
-    /* --- Parçacık Animasyonu (Mesaj Açılınca) --- */
-    function launchConfetti() {
-        for (let i = 0; i < 40; i++) {
-            let c = document.createElement("div");
-            c.classList.add("confetti");
-            c.style.left = Math.random() * 100 + "vw";
-            c.style.animationDelay = (Math.random() * 2) + "s";
-            c.style.background = ["#ff69b4", "#ff1493", "#ffc0cb", "#ff84c2"][Math.floor(Math.random()*4)];
-            document.body.appendChild(c);
-
-            setTimeout(() => c.remove(), 3000);
+      },
+      'onStateChange': (e)=>{
+        // YT State: 1 = playing, 2 = paused, 0 = ended
+        if (e.data === YT.PlayerState.PLAYING){
+          updatePlayUI(true);
+        } else {
+          updatePlayUI(false);
         }
+      }
     }
+  });
+}
+
+// yükle iframe api
+(function loadYT(){
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.body.appendChild(tag);
+})();
+
+function showPlayOverlay(playing){
+  const overlay = document.getElementById('playOverlay');
+  overlay.style.display = 'flex';
+  document.getElementById('playStatus').textContent = playing ? 'Oynatılıyor...' : 'Otomatik Oynatlama Engellendi';
+  document.getElementById('playBtn').textContent = playing ? '❚❚' : '►';
+  overlay.setAttribute('aria-hidden','false');
+}
+
+function updatePlayUI(isPlaying){
+  const btn = document.getElementById('playBtn');
+  const status = document.getElementById('playStatus');
+  btn.textContent = isPlaying ? '❚❚' : '►';
+  status.textContent = isPlaying ? 'Oynatılıyor...' : 'Duraklatıldı';
+}
+
+// play/pause butonu
+document.addEventListener('click', (e)=>{
+  if (e.target && e.target.id === 'playBtn'){
+    togglePlay();
+  }
+});
+
+// mute/döngü butonları
+document.getElementById('muteBtn').addEventListener('click', ()=>{
+  muted = !muted;
+  if (!player) return;
+  if (muted){ player.mute(); document.getElementById('muteBtn').textContent = 'Ses: Kapalı'; }
+  else { player.unMute(); document.getElementById('muteBtn').textContent = 'Ses: Açık'; }
+});
+
+document.getElementById('loopBtn').addEventListener('click', ()=>{
+  loopEnabled = !loopEnabled;
+  document.getElementById('loopBtn').textContent = loopEnabled ? 'Döngü: Aç' : 'Döngü: Kapalı';
+  // yeniden ayarlamak için oynatıcıyı yeniden başlat
+  if (player && player.setLoop) {
+    try{ player.setLoop(loopEnabled); }catch(e){}
+  }
+});
+
+// play/pause kontrolü
+function togglePlay(){
+  if (!player) return;
+  // YouTube API state kontrolü
+  const state = player.getPlayerState();
+  if (state === YT.PlayerState.PLAYING){
+    player.pauseVideo();
+  } else {
+    player.playVideo();
+  }
+}
+
+// sayfa yüklenince küçük bir deneme: eğer kullanıcı eylemi gerektirirse gösterge
+window.addEventListener('load', ()=>{
+  // Eğer tarayıcı otomatik oynatmayı engellerse, kullanıcıya görünür bir buton bırak.
+  // overlay defaultta görünmez; API onReady durumuna göre düzenlenir.
+  // küçük görsel animasyon ekleyelim:
+  document.querySelectorAll('.photo').forEach((el,i)=>{
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(8px) scale(.99)';
+    setTimeout(()=>{ el.style.transition='opacity .6s ease, transform .6s cubic-bezier(.2,.9,.2,1)'; el.style.opacity=1; el.style.transform='translateY(0) scale(1)'; }, 120 + i*120);
+  });
+});
+
+// eğer kullanıcı play overlay'ü tıklarsa, zorla başlatmayı dene
+document.getElementById('playBtn').addEventListener('click', async ()=>{
+  if (!player){
+    // eğer player henüz yoksa, API yüklenene kadar bekle ve sonra başlat
+    alert('Müzik başlatılıyor, lütfen birkaç saniye bekleyin.');
+    return;
+  }
+  try{
+    await player.playVideo();
+    updatePlayUI(true);
+  }catch(e){
+    // bazı durumlarda playPromise kabul etmez
+    try{ player.playVideo(); updatePlayUI(true); }catch(e2){ alert('Otomatik oynatma tarayıcı tarafından engellendi. Lütfen sayfada herhangi bir yere tıklayın veya mobil tarayıcınızda oynat düğmesine basın.'); }
+  }
+});
+
+// erişilebilirlik: fotoğraflara tıklayınca büyüteç efekti (lightbox basit)
+document.querySelectorAll('.photo img').forEach(img=>{
+  img.style.cursor='zoom-in';
+  img.addEventListener('click', ()=>{
+    openLightbox(img.src, img.alt);
+  });
+});
+
+function openLightbox(src, alt){
+  const overlay = document.createElement('div');
+  overlay.style.position='fixed'; overlay.style.inset='0'; overlay.style.background='rgba(0,0,0,0.85)'; overlay.style.display='grid'; overlay.style.placeItems='center'; overlay.style.zIndex=9999;
+  overlay.innerHTML = '<img src="'+src+'" alt="'+(alt||'')+'" style="max-width:92%;max-height:92%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.8)"><button aria-label="Kapat" style="position:absolute;top:20px;right:20px;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,0.06);border:none;color:#fff;cursor:pointer">Kapat</button>';
+  overlay.querySelector('button').addEventListener('click', ()=> document.body.removeChild(overlay));
+  overlay.addEventListener('click', (ev)=>{ if (ev.target===overlay) document.body.removeChild(overlay); });
+  document.body.appendChild(overlay);
+}
+
+/* Not:
+   - Tarayıcılar otomatik ses çalmayı sıkı kısıtlar. Kod otomatik başlatmayı dener; eğer engellenirse
+     kullanıcıya görünür "play" düğmesi sunulur.
+   - Google Drive paylaşımları, dosya izinlerine bağlı olarak doğrudan görüntülenmeyebilir. Eğer resimler yüklenmiyorsa,
+     lütfen Drive üzerindeki paylaşım izinlerini "Herkes linke sahip olan görebilsin" olarak ayarlayın.
+*/
 </script>
-
 </body>
 </html>
