@@ -74,10 +74,13 @@
             object-fit: cover; animation: pulse 4s infinite;
         }
 
-        /* Galeri */
+        /* Galeri Yapısı (3 Görsel için Optimize Edildi) */
         .gallery {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 10px; padding: 10px 0;
+            max-width: 600px; /* Galeriyi ortalamak için */
+            margin: 0 auto;
         }
         .gallery-item {
             overflow: hidden; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
@@ -148,7 +151,7 @@
         <h1>İbrahim & Sümeyye ❤️</h1>
         <h2>17. Ay Yıldönümü Kutlu Olsun!</h2>
         
-        <img src="https://i.imgur.com/BKDfYRJ.jpeg" alt="İbrahim ve Sümeyye" class="main-image">
+        <img src="https://i.imgur.com/RzTx1h2.jpeg" alt="İbrahim ve Sümeyye" class="main-image">
 
         <div class="message-box">
             <p style="color: var(--color-love); font-weight: 700;">**Kahve Gözlüm Sümeyye'ye,**</p>
@@ -171,11 +174,7 @@
             </div>
             
             <div class="gallery-item">
-                <img src="https://i.imgur.com/RzTx1h2.jpeg" alt="Anı 3">
-            </div>
-            
-            <div class="gallery-item">
-                <img src="https://i.imgur.com/mW45XIF.jpeg" alt="Anı 4">
+                <img src="https://i.imgur.com/BKDfYRJ.jpeg" alt="Anı 3">
             </div>
         </div>
     </div>
@@ -238,7 +237,7 @@
                 isMusicPlaying = true;
                 musicToggle.style.display = 'none'; 
             }).catch(error => {
-                musicToggle.style.display = 'flex'; // Başarısızsa butonu göster
+                musicToggle.style.display = 'flex'; 
                 musicIcon.textContent = '🎶'; 
             });
         }
