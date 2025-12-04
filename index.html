@@ -18,6 +18,8 @@
         padding: 40px 20px;
         background: linear-gradient(135deg, #ffb6d9, #ffd9ea);
         color: #fff;
+        position: relative;
+        overflow: hidden;
     }
 
     header h1 {
@@ -25,8 +27,21 @@
         margin-bottom: 10px;
     }
 
-    header p {
-        opacity: 0.9;
+    /* Parçacık animasyonu */
+    .confetti {
+        position: fixed;
+        top: -10px;
+        width: 10px;
+        height: 10px;
+        background: #ff84c2;
+        opacity: 0.8;
+        border-radius: 50%;
+        animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(-20px) rotate(0); }
+        100% { transform: translateY(110vh) rotate(360deg); }
     }
 
     .section {
@@ -49,6 +64,30 @@
         color: #b46378;
         font-size: 18px;
         margin-bottom: 15px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .photo-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 14px;
+    }
+
+    .upload-btn {
+        margin-top: 10px;
+        background: #ff9bcf;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .upload-btn:hover {
+        background: #ff7fbe;
     }
 
     .year-message {
@@ -60,18 +99,32 @@
         margin-top: 20px;
     }
 
-    .hidden {
-        display: none;
+    .hidden { display: none; }
+
+    #countdown {
+        font-size: 24px;
+        font-weight: bold;
+        color: #d14e7b;
+        margin-top: 15px;
     }
 
-    audio {
-        width: 100%;
-        margin-top: 10px;
+    iframe.spotify {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
     }
 </style>
 </head>
 
 <body>
+
+<!-- Otomatik şarkı -->
+<iframe class="spotify"
+    src="https://www.youtube.com/embed/PY-jid_6RT0?autoplay=1&loop=1&playlist=PY-jid_6RT0"
+    allow="autoplay">
+</iframe>
 
 <header>
     <h1>💗 İbrahim & Sümeyye 💗</h1>
@@ -80,7 +133,8 @@
 
 <div class="section">
     <h2>📸 En Sevdiğim Fotoğraf</h2>
-    <div class="photo-box">Buraya fotoğraf ekleyebilirsin</div>
+    <div class="photo-box" id="mainPhoto">Buraya fotoğraf ekleyebilirsin</div>
+    <input type="file" id="mainUpload" accept="image/*" class="upload-btn" onchange="loadPhoto(event, 'mainPhoto')" />
 
     <textarea style="width:100%;height:120px;border-radius:12px;padding:12px;border:1px solid #ffb6d9;">
 Buraya fotoğrafın altına özel not / şiir / anı yazılabilir...
@@ -89,40 +143,87 @@ Buraya fotoğrafın altına özel not / şiir / anı yazılabilir...
 
 <div class="section">
     <h2>📸 Ek Fotoğraflar</h2>
-    <div class="photo-box">Fotoğraf 1</div>
-    <div class="photo-box">Fotoğraf 2</div>
-    <div class="photo-box">Fotoğraf 3</div>
-</div>
 
-<div class="section">
-    <h2>🎵 Müzik</h2>
-    <p>İstersen buraya şarkı koyabilirim. (mp3 yükleyince çalışır)</p>
-    <audio controls>
-        <source src="muzik.mp3" type="audio/mpeg">
-    </audio>
+    <div class="photo-box" id="p1">Fotoğraf 1</div>
+    <input type="file" accept="image/*" class="upload-btn" onchange="loadPhoto(event, 'p1')" />
+
+    <div class="photo-box" id="p2">Fotoğraf 2</div>
+    <input type="file" accept="image/*" class="upload-btn" onchange="loadPhoto(event, 'p2')" />
+
+    <div class="photo-box" id="p3">Fotoğraf 3</div>
+    <input type="file" accept="image/*" class="upload-btn" onchange="loadPhoto(event, 'p3')" />
 </div>
 
 <div class="section year-message">
     <h2>🎄 1 Ocak Sürpriz Mesajı</h2>
+
+    <p id="countdown"></p>
+
+    <p id="lockedText">
+        Bu mesaj <b>1 Ocak</b> tarihinde açılacaktır. 🎁
+    </p>
+
     <p id="newYearText" class="hidden">
-        Yeni yılın ilk dakikasında açılan bir mesaj…  
+        Yeni yılın ilk dakikasında açılan özel mesaj...  
         <br><br>
         Buraya istediğin özel yılbaşı mesajını yazabilirsin.
-    </p>
-    <p id="lockedText" class="">
-        Bu mesaj <b>1 Ocak</b> tarihinde açılacaktır. 🎁
     </p>
 </div>
 
 <script>
-    // 1 Ocak mesaj kilidi
-    const today = new Date();
-    const month = today.getMonth();   // 0 = Ocak
-    const day = today.getDate();
+    /* --- Fotoğraf Yükleme --- */
+    function loadPhoto(event, id) {
+        const box = document.getElementById(id);
+        const file = event.target.files[0];
+        const reader = new FileReader();
 
-    if (month === 0 && day >= 1) {
-        document.getElementById("newYearText").classList.remove("hidden");
-        document.getElementById("lockedText").classList.add("hidden");
+        reader.onload = function(e) {
+            box.innerHTML = `<img src="${e.target.result}" />`;
+        }
+        reader.readAsDataURL(file);
+    }
+
+
+    /* --- Yılbaşı Geri Sayım --- */
+    const target = new Date(new Date().getFullYear() + 1, 0, 1, 0, 0, 0);
+
+    function updateCountdown() {
+        const now = new Date();
+        const diff = target - now;
+
+        if (diff <= 0) {
+            document.getElementById("countdown").classList.add("hidden");
+            document.getElementById("lockedText").classList.add("hidden");
+            document.getElementById("newYearText").classList.remove("hidden");
+            launchConfetti();
+            return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("countdown").innerHTML =
+            `Kalan Süre: ${d} gün ${h} saat ${m} dakika ${s} saniye`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+
+    /* --- Parçacık Animasyonu (Mesaj Açılınca) --- */
+    function launchConfetti() {
+        for (let i = 0; i < 40; i++) {
+            let c = document.createElement("div");
+            c.classList.add("confetti");
+            c.style.left = Math.random() * 100 + "vw";
+            c.style.animationDelay = (Math.random() * 2) + "s";
+            c.style.background = ["#ff69b4", "#ff1493", "#ffc0cb", "#ff84c2"][Math.floor(Math.random()*4)];
+            document.body.appendChild(c);
+
+            setTimeout(() => c.remove(), 3000);
+        }
     }
 </script>
 
