@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İbrahim & Sümeyye | ❤️ Yıldönümü ve Yeni Yıl Sürprizi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Değişkenleri (Renk Paleti - Açık Pembe) */
+        :root {
+            --color-primary: #FFFFFF;
+            --color-accent: #FFC0CB; /* Açık Pembe (Light Pink) */
+            --color-text: #333333;
+            --color-secondary-accent: #FFB6C1; /* Daha Canlı Açık Pembe */
+            --color-dark-text: #666666;
+            --color-love: #E91E63; /* Koyu, Canlı Pembe */
+        }
+
+        /* Temel Ayarlar ve Mobil Optimizasyon */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--color-primary);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animasyonlar */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+
+        .container {
+            width: 100%; min-height: 100vh; padding: 15px; padding-top: 75px;
+            animation: fadeIn 1s ease-out; display: none; 
+        }
+        .container.active { display: block; }
+
+        h1, h2 { font-family: 'Playfair Display', serif; text-align: center; margin-bottom: 15px; font-weight: 700; }
+        h1 { color: var(--color-love); font-size: 2.2em; }
+        h2 { color: var(--color-dark-text); font-size: 1.4em; }
+
+        /* Navigasyon Çubuğu */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; background-color: var(--color-primary);
+            box-shadow: 0 2px 10px rgba(255, 192, 203, 0.5); z-index: 1000;
+            display: flex; justify-content: space-around; padding: 10px 5px;
+        }
+        .nav-btn {
+            background-color: transparent; border: none; color: var(--color-dark-text);
+            padding: 10px 10px; font-size: 0.9em; cursor: pointer;
+            transition: color 0.3s, border-bottom 0.3s, background-color 0.3s;
+            font-weight: 600; text-transform: uppercase; border-radius: 5px;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            color: var(--color-text); background-color: var(--color-accent);
+            border-bottom: 2px solid var(--color-secondary-accent);
+        }
+
+        /* Mesaj Kutusu */
+        .message-box {
+            background-color: var(--color-accent); color: var(--color-dark-text);
+            padding: 25px; margin: 20px auto; border-radius: 10px; max-width: 90%;
+            box-shadow: 0 5px 15px rgba(255, 192, 203, 0.6); border: 2px solid var(--color-secondary-accent);
+            font-size: 1em; text-align: center;
+        }
+        .message-box strong { font-weight: 700; color: var(--color-love); }
+
+        /* Ana Sayfa Görseli */
+        .main-image {
+            width: 90%; max-width: 400px; height: auto; border-radius: 15px;
+            display: block; margin: 0 auto 20px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            object-fit: cover; animation: pulse 4s infinite;
+        }
+
+        /* Galeri Yapısı (3 Görsel için Optimize Edildi) */
+        .gallery {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px; padding: 10px 0;
+            max-width: 600px; /* Galeriyi ortalamak için */
+            margin: 0 auto;
+        }
+        .gallery-item {
+            overflow: hidden; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-in-out; border: 3px solid var(--color-accent);
+        }
+        .gallery-item:hover { transform: scale(1.05); border-color: var(--color-secondary-accent); }
+        .gallery-item img { width: 100%; height: 180px; display: block; object-fit: cover; }
+
+        /* Sayaç */
+        .countdown-container {
+            text-align: center; margin: 30px 0; padding: 15px; background-color: var(--color-accent);
+            border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        #countdown {
+            font-family: 'Playfair Display', serif; font-size: 2.5em; color: var(--color-text);
+            font-weight: 700; margin-top: 10px;
+        }
+        .timer-unit { display: inline-block; margin: 0 5px; font-size: 0.35em; color: var(--color-dark-text); }
+        .timer-unit span { display: block; font-size: 2em; font-weight: 700; color: var(--color-love); }
+
+        /* Kilitli Mesaj */
+        .locked-message {
+            background-color: var(--color-secondary-accent); color: var(--color-primary);
+            padding: 30px; border-radius: 10px; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            transition: all 1s ease-in-out; min-height: 150px; display: flex;
+            flex-direction: column; justify-content: center; align-items: center; margin-top: 20px;
+        }
+        .locked-message.locked { filter: blur(5px); opacity: 0.6; }
+        .locked-message.unlocked { filter: blur(0); opacity: 1; background-color: var(--color-love); }
+        #lock-icon { font-size: 2.5em; margin-bottom: 10px; }
+        #new-year-content { display: none; text-align: center; font-size: 1em; }
+
+        /* Müzik Butonu */
+        #music-toggle {
+            position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
+            border-radius: 50%; background-color: var(--color-love); color: var(--color-primary);
+            border: none; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); font-size: 1.5em;
+            cursor: pointer; z-index: 1001; display: none;
+            align-items: center; justify-content: center;
+        }
+
+        /* Kalp Animasyonu */
+        .heart-float {
+            position: absolute; font-size: 1em; color: var(--color-love); opacity: 0;
+            pointer-events: none; animation: floatUp 5s infinite ease-out;
+        }
+        @keyframes floatUp { 0% { transform: translateY(0); opacity: 0.8; } 100% { transform: translateY(-100vh); opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+    <audio id="background-music" loop preload="auto">
+        <source src="sarki.mp3" type="audio/mp3">
+    </audio>
+
+    <button id="music-toggle" aria-label="Müziği Başlat/Durdur">
+        <span id="music-icon">🎶</span>
+    </button>
+
+    <nav class="navbar">
+        <button class="nav-btn active" onclick="showPage('home-page', this)">Ana Sayfa</button>
+        <button class="nav-btn" onclick="showPage('photos-page', this)">Biz</button>
+        <button class="nav-btn" onclick="showPage('new-year-page', this)">Yılbaşı Mesajı</button>
+    </nav>
+
+    <div id="home-page" class="container active">
+        <h1>İbrahim & Sümeyye ❤️</h1>
+        <h2>17. Ay Yıldönümü Kutlu Olsun!</h2>
+        
+        <img src="https://i.imgur.com/RzTx1h2.jpeg" alt="İbrahim ve Sümeyye" class="main-image">
+
+        <div class="message-box">
+            <p style="color: var(--color-love); font-weight: 700;">**Kahve Gözlüm Sümeyye'ye,**</p>
+            <p>"Kalbim, Ömrüm, Hayatım, Her şeyim ❤️ Bugün birlikteliğimizin 17.ayı ve ben seninle geçirdiğim her saniye için çok mutluyum. Senin hayatımda olmandan çok mutluyum. Hayatında olmaktan çok mutluyum. Seninle olmaktan çok mutluyum. Dile kolay beraber **519.günümüz** ❤️❤️ 519 kere maşallah bize. Seninle olmaktan o kadar keyif alıyorum ki bunu inan tahmin bile edemezsin. Sen hayatımın en özel parçasısın ve son nefesime kadar da öyle olucaksın. Yanımda olduğun her saniye için teşekkür ederim güzel sevgilim. Seni çok seviyorum ❤️ 17.ayımız kutlu olsun kahve gözlüm 🤎🤎"</p>
+            <p style="font-style: italic;">Sevgilerinle, **İbrahim**</p>
+        </div>
+    </div>
+
+    <div id="photos-page" class="container">
+        <h1>Anılarımızdan Kareler 📸</h1>
+        <h2>Birlikte yazdığımız hikayemiz...</h2>
+
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://i.imgur.com/mW45XIF.jpeg" alt="Anı 1">
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://i.imgur.com/sHGrHAF.jpeg" alt="Anı 2">
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://i.imgur.com/BKDfYRJ.jpeg" alt="Anı 3">
+            </div>
+        </div>
+    </div>
+
+    <div id="new-year-page" class="container">
+        <h1>Yeni Yıl Sürprizi Geliyor! ⏳</h1>
+        <h2>Sayaç Sıfırlandığında Bu Sihir Açılacak.</h2>
+
+        <div class="countdown-container">
+            <p style="font-size: 1.1em; color: var(--color-dark-text);">Yeni Yıla Kalan Süre:</p>
+            <div id="countdown">
+                <div class="timer-unit"><span id="days">00</span> Gün</div>
+                <div class="timer-unit"><span id="hours">00</span> Saat</div>
+                <div class="timer-unit"><span id="minutes">00</span> Dakika</div>
+                <div class="timer-unit"><span id="seconds">00</span> Saniye</div>
+            </div>
+        </div>
+
+        <div id="locked-box" class="locked-message locked">
+            <span id="lock-icon">🔒</span>
+            <p id="lock-text" style="font-size: 1.3em; font-weight: 700;">Mesaj Kilitli! Beklediğimize Değecek... ❤️</p>
+
+            <div id="new-year-content">
+                <p style="font-family: 'Playfair Display', serif; font-size: 1.4em; margin-bottom: 15px; color: var(--color-primary);">**Canım Sevgilim Sümeyye,**</p>
+                <p>"Yeni bir yıla seninle girmek, hayal edebileceğim en güzel başlangıç. 💖 Birlikte geçireceğimiz her yeni gün için kalbim heyecanla atıyor. Bu kilitli mesaj, sana olan sevgimin zamanla daha da derinleşeceğinin bir simgesiydi.</p>
+                <p>Sayacın sıfırlandığı bu anda, sana bir kez daha söz veriyorum; hayatımın her anını seninle paylaşmak, en büyük dileğim. Gözlerin gibi parlayan, aşkımız gibi sıcak bir yıl dilerim sevgilim. Yeni yılın kutlu olsun!</p>
+                <p>Seni çok seviyorum, daima seninle. **İbrahim** ❤️ **Sümeyye**"</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="heart-rain"></div>
+
+    <script>
+        const pages = document.querySelectorAll('.container');
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const lockedBox = document.getElementById('locked-box');
+        const newYearContent = document.getElementById('new-year-content');
+        const audio = document.getElementById('background-music');
+        const musicToggle = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        const heartRain = document.getElementById('heart-rain');
+        
+        let isMusicPlaying = false;
+        
+        // Sayfa Değiştirme Fonksiyonu
+        function showPage(pageId, clickedButton = null) {
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            navBtns.forEach(btn => btn.classList.remove('active'));
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
+        }
+
+        // Müzik Başlatma Denemesi (Otomatik Çalma)
+        function attemptAutoplay() {
+            audio.volume = 0.8; 
+            audio.play().then(() => {
+                isMusicPlaying = true;
+                musicToggle.style.display = 'none'; 
+            }).catch(error => {
+                musicToggle.style.display = 'flex'; 
+                musicIcon.textContent = '🎶'; 
+            });
+        }
+        
+        // Kullanıcı butona tıklarsa
+        musicToggle.addEventListener('click', () => {
+            if (!isMusicPlaying) {
+                audio.play();
+                isMusicPlaying = true;
+                musicIcon.textContent = '⏸️';
+            } else {
+                audio.pause();
+                isMusicPlaying = false;
+                musicIcon.textContent = '🎶';
+            }
+        });
+        
+        // Kalp Yağmuru
+        function createHeart() {
+            const heart = document.createElement('span');
+            heart.classList.add('heart-float');
+            heart.innerHTML = '💖'; 
+
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 5 + 5 + 's'; 
+            heart.style.fontSize = Math.random() * 1.5 + 1 + 'em'; 
+            
+            heartRain.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 10000);
+        }
+        
+        setInterval(createHeart, 500);
+
+        // Sayaç Fonksiyonu (1 Ocak 2026)
+        function startCountdown() {
+            const targetDate = new Date('January 1, 2026 00:00:00').getTime(); 
+
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Ekrana Yazdırma
+                document.getElementById("days").textContent = String(Math.max(0, days)).padStart(2, '0');
+                document.getElementById("hours").textContent = String(Math.max(0, hours)).padStart(2, '0');
+                document.getElementById("minutes").textContent = String(Math.max(0, minutes)).padStart(2, '0');
+                document.getElementById("seconds").textContent = String(Math.max(0, seconds)).padStart(2, '0');
+
+                // Süre bittiğinde
+                if (distance < 0) {
+                    clearInterval(interval);
+                    document.getElementById("countdown").innerHTML = "<p style='font-size: 1.2em; font-weight: 700; color: var(--color-love);'>Zaman Geldi! 🥂</p>";
+                    
+                    lockedBox.classList.remove('locked');
+                    lockedBox.classList.add('unlocked');
+                    newYearContent.style.display = 'block';
+                    document.getElementById('lock-icon').style.display = 'none';
+                    document.getElementById('lock-text').style.display = 'none';
+                }
+            }, 1000);
+        }
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home-page', navBtns[0]);
+            startCountdown(); 
+            attemptAutoplay(); 
+            
+            // Kullanıcı sayfada herhangi bir yere tıklarsa tekrar otomatik çalma denemesi yap
+            document.body.addEventListener('click', attemptAutoplay, { once: true });
+        });
+    </script>
+</body>
+</html>
